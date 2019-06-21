@@ -20,7 +20,12 @@
 		protected CameraMode CameraMode = CameraMode.FollowPlayer;
 
 		protected OverworldPlayer OverworldPlayer;
-		
+
+		private void Awake()
+		{
+			GameManager.Instance.CameraController = this;
+		}
+
 		private void Start()
 		{
 			this.OverworldPlayer = GameManager.Instance.OverWorldPlayer;
@@ -42,8 +47,7 @@
 					
 					break;
 				case CameraMode.Static:
-					//TODO
-					//STATIC POS
+					//STATIC POS - do nothing
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
@@ -52,7 +56,15 @@
 
 		protected void CameraModeChanged()
 		{
-			
+			switch (this.CameraMode)
+			{
+				case CameraMode.FollowPlayer:
+					break;
+				case CameraMode.Static:
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
 		}
 	}
 }
