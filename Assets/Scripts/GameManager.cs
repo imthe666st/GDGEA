@@ -12,11 +12,16 @@ public class GameManager : MonoBehaviour
 	public static GameManager Instance = null;
 
 	public bool isPaused = false;
-	public OverworldPlayer OverWorldPlayer;
-	public CameraController CameraController;
 
+	[HideInInspector]
+	public OverworldPlayer OverWorldPlayer;
+	[HideInInspector] 
+	public BattlePlayer BattlePlayer;
+	[HideInInspector]
+	public CameraController CameraController;
+	[HideInInspector]
 	public Battlefield Battlefield;
-	
+	[HideInInspector]
 	public LevelData LevelData;
 
 	private void Awake()
