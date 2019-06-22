@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6554736390298987251, guid: 00a379a9204ca344b9788d1ab3c27c67,
+  m_Sprite: {fileID: -577436947000661451, guid: 00a379a9204ca344b9788d1ab3c27c67,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Moveable: 0
   PlayerMovable: []
+  PlayerAttackable: []
   Idle: {fileID: 6554736390298987251, guid: 00a379a9204ca344b9788d1ab3c27c67, type: 3}
   Selected: {fileID: -577436947000661451, guid: 00a379a9204ca344b9788d1ab3c27c67,
     type: 3}

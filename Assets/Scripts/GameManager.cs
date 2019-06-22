@@ -105,6 +105,8 @@ public class GameManager : MonoBehaviour
 			var loot = this.LevelData.LootPool.GetRandomLoot();
 			
 			this.playerInventory.CollectedModifier.Add(Instantiate(loot));
+
+			this.CameraController.SpawnTextBox("You've found something: " + loot.Description);
 		}
 
 		this.isPaused = false;
