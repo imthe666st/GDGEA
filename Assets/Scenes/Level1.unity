@@ -1788,7 +1788,7 @@ GameObject:
   - component: {fileID: 5368057309552418180}
   - component: {fileID: 8333069662252346756}
   m_Layer: 0
-  m_Name: Flower
+  m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
