@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
 	public void EndBattle()
 	{
-		Destroy(this.Battlefield);
+		Destroy(this.Battlefield.gameObject);
 		this.Battlefield = null;
 
 		this.CameraController.cameraMode = CameraMode.FollowPlayer;
