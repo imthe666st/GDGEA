@@ -124,6 +124,7 @@ namespace Battle {
 						break;
 					
 					case BattleState.PlayerMoving:
+						
 						break;
 				}
 			}
