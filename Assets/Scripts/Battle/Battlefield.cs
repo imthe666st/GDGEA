@@ -92,6 +92,8 @@ namespace Battle {
             var pos = this.Tiles[value].transform.position - new Vector3(0, 0, 0.1f);
 
             Instantiate(this.BattlePlayerPrefab, pos, Quaternion.identity, this.transform);
+            
+            this.UpdateTilesPlayerWalk();
         }
         
         public bool CanSpawnEnemy() => this.EnemySpawnTiles.Count > 0;
@@ -119,7 +121,8 @@ namespace Battle {
             var playerPos = player.transform.position;
             
             var walkableTiles = new List<FieldTile>();
-            this.Tiles[(int)playerPos.y * (int)playerPos.x].PlayerWalk(player.Movement, walkableTiles);
+            this.Tiles[this.fieldHeight * (int)playerPos.x + (int)playerPos.y].PlayerWalk(player.Movement + 1, 
+            walkableTiles);
         }
     }
 }

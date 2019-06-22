@@ -122,7 +122,7 @@ namespace Battle {
 				return;
 
 			walkable.Add(this);
-			this._tileStatus |= TileStatus.Walkable;
+			this.TileStatus = TileStatus.Walkable;
 			
 			//preemptively stop
 			if (remaining - 1 == 0)
