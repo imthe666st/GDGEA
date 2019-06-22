@@ -1,4 +1,6 @@
-﻿using Battle;
+﻿using System;
+
+using Battle;
 
 using Camera;
 
@@ -11,6 +13,8 @@ using Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using Random = UnityEngine.Random;
+
 public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance = null;
@@ -18,7 +22,8 @@ public class GameManager : MonoBehaviour
 	public bool isPaused = false;
 	public Inventory playerInventory;
 	public Difficulty difficulty = Difficulty.Normal;
-
+	public Material MonoChrome;
+	
 	[HideInInspector]
 	public OverworldPlayer OverWorldPlayer;
 	[HideInInspector] 
@@ -37,7 +42,10 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		if (Instance == null)
+		{
 			Instance = this;
+			this.ChangeShaderValue(ShaderState.None.toFloat());
+		}
 		else if (Instance != this)
 		{
 			Destroy(this.gameObject);
@@ -87,5 +95,10 @@ public class GameManager : MonoBehaviour
 		}
 
 		this.isPaused = false;
+	}
+
+	public void ChangeShaderValue(float value)
+	{
+		this.MonoChrome.SetFloat("_Status", value);
 	}
 }
