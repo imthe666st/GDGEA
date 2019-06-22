@@ -17,9 +17,9 @@ namespace Player {
                 var inventory = GameManager.Instance.PlayerInventory;
 
                 var damage = 0;
-                if (inventory.CurrentWeapon != null) damage += inventory.CurrentWeapon.Damage;
-                if (inventory.CurrentModifier1 != null) damage += inventory.CurrentModifier1.Damage;
-                if (inventory.CurrentModifier2 != null) damage += inventory.CurrentModifier2.Damage;
+                damage += inventory.CurrentWeapon?.Damage ?? 0;
+                damage += inventory.CurrentModifier1?.Damage ?? 0;
+                damage += inventory.CurrentModifier2?.Damage ?? 0;
                 
                 return damage;
             }
@@ -32,9 +32,9 @@ namespace Player {
                 var inventory = GameManager.Instance.PlayerInventory;
 
                 var movement = this.BaseMovement;
-                if (inventory.CurrentWeapon != null) movement += inventory.CurrentWeapon.Movement;
-                if (inventory.CurrentModifier1 != null) movement += inventory.CurrentModifier1.Movement;
-                if (inventory.CurrentModifier2 != null) movement += inventory.CurrentModifier2.Movement;
+                movement += inventory.CurrentWeapon?.Movement ?? 0;
+                movement += inventory.CurrentModifier1?.Movement ?? 0;
+                movement += inventory.CurrentModifier2?.Movement ?? 0;
                 
                 return movement;
             }
