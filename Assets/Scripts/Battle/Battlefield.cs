@@ -214,6 +214,11 @@ namespace Battle {
         private void Update()
         {
             this.UpdateBattle();
+
+            if (this.Enemies.Count == 0)
+            {
+                GameManager.Instance.EndBattle();
+            }
         }
 
         public void UpdateBattle()

@@ -5,7 +5,13 @@ namespace Player {
 
     using Battle;
 
+    using DefaultNamespace;
+
     using DG.Tweening;
+
+    using Enemy;
+
+    using Random = Random;
 
     public class BattlePlayer : MonoBehaviour
     {
@@ -15,10 +21,33 @@ namespace Player {
 
         public float MoveTime = 0.2f;
         public float AttackTime = 0.1f;
-        
+
+        public int BaseEasyHealth = 15;
+        public int BaseMediumHealth = 10;
+        public int BaseHardHealth = 5;
+
+        public int BaseHealth
+        {
+            get
+            {
+                switch (GameManager.Instance.difficulty)
+                {
+                    case Difficulty.Easy:
+                        return this.BaseEasyHealth;
+                    case Difficulty.Normal:
+                        return this.BaseMediumHealth;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
+        private int health;
+
         private void Awake()
         {
             GameManager.Instance.BattlePlayer = this;
+            this.health = this.BaseHealth;
         }
 
         public int Damage
@@ -83,6 +112,36 @@ namespace Player {
                 return maxDistance;
             }
         }
+
+        public float CritDamage
+        {
+            get
+            {
+                var inventory = GameManager.Instance.playerInventory;
+
+                var critDamage = 2f;
+
+                if (inventory.CurrentModifier1 != null) critDamage += inventory.CurrentModifier1.CritDamage;
+                if (inventory.CurrentModifier2 != null) critDamage += inventory.CurrentModifier2.CritDamage;
+
+                return critDamage;
+            }
+        }
+
+        public float CritChance
+        {
+            get
+            {
+                var inventory = GameManager.Instance.playerInventory;
+
+                var critChance = 0f;
+                
+                if (inventory.CurrentModifier1 != null) critChance += inventory.CurrentModifier1.CritChance;
+                if (inventory.CurrentModifier2 != null) critChance += inventory.CurrentModifier2.CritChance;
+
+                return critChance;
+            }
+        }
         
         public void MoveToTile(FieldTile target)
         {
@@ -133,16 +192,57 @@ namespace Player {
             var dir = tile.transform.position - pos;
             dir.Normalize();
 
+            var target = GameManager.Instance.Battlefield.Enemies.Find(e => e.PositionTile == tile);
+
             mv.Append(this.transform.DOMove(pos + 0.5f * dir, this.AttackTime))
-              .Append(this.transform.DOMove(pos, this.AttackTime)).OnComplete(() =>
-                                                                            {
-                                                                                GameManager.Instance.BattleState =
-                                                                                    BattleState.EnemiesMoving;
-                                                                                GameManager.Instance.Battlefield
-                                                                                           .Enemies.Shuffle();
-                                                                                GameManager.Instance.Battlefield
-                                                                                .PlayerAttackable.Clear();
-                                                                            });
+              .Append(this.transform.DOMove(pos, this.AttackTime))
+              .OnComplete(() =>
+                          {
+                              GameManager.Instance.BattleState =
+                                  BattleState.EnemiesMoving;
+                              GameManager.Instance.Battlefield
+                                         .Enemies.Shuffle();
+                              GameManager.Instance.Battlefield
+                                         .PlayerAttackable.Clear();
+                          });
+
+            var moveEnemy = DOTween.Sequence();
+
+            if (target == null)
+                return;
+
+            var tarPos = target.transform.position;
+
+            moveEnemy.AppendInterval(this.AttackTime)
+                     .AppendCallback(() => this.DealDamage(target))
+                     .Append(target.transform.DOMove(tarPos + 0.25f * dir, this.AttackTime))
+                     .Append(target.transform.DOMove(tarPos, this.AttackTime));
+
+        }
+
+        public void DealDamage(Enemy target)
+        {
+            if (target == null)
+                return;
+
+            var damage = this.Damage;
+
+            if (Random.Range(0, 1f) < this.CritChance)
+            {
+                damage = (int)(this.Damage * this.CritDamage);
+            }
+            
+            target.TakeDamage(damage);
+        }
+
+        public void TakeDamage(int damage)
+        {
+            this.health -= damage;
+
+            if (this.health <= 0)
+            {
+                //TODO: DIE
+            }
         }
     }
 }

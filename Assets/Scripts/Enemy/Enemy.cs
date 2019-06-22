@@ -7,6 +7,8 @@ namespace Enemy {
 
 	using DG.Tweening;
 
+	using Player;
+
 	public abstract class Enemy : MonoBehaviour
 	{
 		public abstract EnemyType Type { get; }
@@ -59,9 +61,11 @@ namespace Enemy {
 		{
 			this.health -= damage;
 
-			if (damage <= 0)
+			if (this.Health <= 0)
 			{
-				//TODO: DEAD
+				GameManager.Instance.Battlefield.Enemies.Remove(this);
+				this.gameObject.SetActive(false);
+				Destroy(this.gameObject);
 			}
 		}
 
@@ -171,10 +175,27 @@ namespace Enemy {
 			var mv = DOTween.Sequence();
 
 			mv.Append(this.transform.DOMove(pos + 0.5f * dir, this.AttackTime))
-			  .Append(this.transform.DOMove(pos, this.AttackTime))
-			  .OnComplete(() => { GameManager.Instance.Battlefield.EnemyCanAttack = true; });
+			  .Append(this.transform.DOMove(pos, this.AttackTime));
+
+			
+			var player = GameManager.Instance.BattlePlayer;
+			var playerKB = DOTween.Sequence();
+			playerKB.AppendInterval(this.AttackTime)
+					.AppendCallback(() => this.DealDamage(player))
+					.Append(player.transform.DOMove(playerPos + 0.25f * dir, this.AttackTime))
+					.Append(player.transform.DOMove(playerPos, this.AttackTime))
+					.OnComplete(() => { GameManager.Instance.Battlefield.EnemyCanAttack = true; });
 			
 			return true;
+		}
+
+		public void DealDamage(BattlePlayer player)
+		{
+			var damage = this.Damage;
+
+			if (Random.Range(0, 1f) < this.CritChance) damage = (int) (this.Damage * this.CritDamage);
+
+			player.TakeDamage(damage);
 		}
 	}
 }

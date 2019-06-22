@@ -139,6 +139,9 @@ namespace Battle {
 			if (remaining == 0)
 				return;
 
+			if(this.HasEnemy)
+				return;
+			
 			walkable.Add(this);
 			this.TileStatus = TileStatus.Walkable;
 			

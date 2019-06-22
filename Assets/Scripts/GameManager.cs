@@ -76,6 +76,8 @@ public class GameManager : MonoBehaviour
 		this.Battlefield = null;
 
 		this.CameraController.cameraMode = CameraMode.FollowPlayer;
+		
+		//TODO: DROP STUFF
 
 		this.isPaused = false;
 	}
