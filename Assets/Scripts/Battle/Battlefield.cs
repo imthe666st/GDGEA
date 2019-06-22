@@ -1,32 +1,40 @@
 ﻿using UnityEngine;
 
 namespace Battle {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     using Camera;
 
+    using DefaultNamespace;
+
     using Enemy;
 
     using Player;
+
+    using Random = UnityEngine.Random;
 
     public class Battlefield : MonoBehaviour
     {
         public FieldTile FieldTilePrefab;
         public StaticCameraMarker CameraMarkerPrefab;
         public BattlePlayer BattlePlayerPrefab;
+        public CursorController CursorPrefab;
 
         public int fieldWidth = 8;
         public int fieldHeight = 8;
         public int enemySpawnWidth = 2;
         public int playerSpawnWidth = 2;
         
-        protected FieldTile[] Tiles;
+        public FieldTile[] Tiles;
 
         protected List<FieldTile> EnemySpawnTiles;
 
         [HideInInspector]
         public List<Enemy> Enemies;
+
+        public List<FieldTile> PlayerWalkable;
         
         private void Awake()
         {
@@ -45,6 +53,8 @@ namespace Battle {
             
             this.SpawnPlayer();
             this.SpawnEnemies();
+            
+            this.UpdateBattle();
         }
 
         private void GenerateField()
@@ -84,6 +94,8 @@ namespace Battle {
         private void SpawnEnemies()
         {
             GameManager.Instance.LevelData.EnemyPool.GetRandom().Spawn(this);
+            
+            this.UpdateTilesEnemyAttack();
         }
 
         private void SpawnPlayer()
@@ -116,13 +128,66 @@ namespace Battle {
         public void UpdateTilesPlayerWalk()
         {
             foreach (var tile in this.Tiles) tile.Reset();
-
+            
             var player = GameManager.Instance.BattlePlayer;
             var playerPos = player.transform.position;
             
             var walkableTiles = new List<FieldTile>();
             this.Tiles[this.fieldHeight * (int)playerPos.x + (int)playerPos.y].PlayerWalk(player.Movement + 1, 
-            walkableTiles);
+            walkableTiles, new List<FieldTile>());
+
+            this.PlayerWalkable = walkableTiles;
+        }
+
+        public void UpdateTilesEnemyAttack()
+        {
+            foreach (var enemy in this.Enemies)
+            {
+                var enemyPos = enemy.transform.position;
+
+                var attackAbleTiles = new List<FieldTile>();
+                this.Tiles[this.fieldHeight * (int) enemyPos.x + (int) enemyPos.y].EnemyAttack(enemy.MinDistance
+                                                                                               + 2,
+                                                                                               enemy.MaxDistance +
+                                                                                               2, 
+                                                                                               GameManager.Instance
+                                                                                               .difficulty == Difficulty.Easy,
+                                                                                               attackAbleTiles, new List<FieldTile>());
+            }
+        }
+
+        public void UpdateBattle()
+        {
+            switch (GameManager.Instance.BattleState)
+            {
+                case BattleState.PlayerToMove:
+                    if (GameManager.Instance.Cursor == null)
+                    {
+                        GameManager.Instance.Cursor = Instantiate(this.CursorPrefab, GameManager.Instance
+                                                                                                .BattlePlayer.transform
+                                                                                                .position -
+                                                                                     new Vector3(0, 0, 0.1f),
+                                                                  Quaternion.identity, this.transform);
+                    }
+                    GameManager.Instance.Cursor.Moveable = true;
+                    GameManager.Instance.Cursor.PlayerMovable = this.PlayerWalkable;
+                    
+                    break;
+                case BattleState.PlayerMoving:
+                    break;
+                case BattleState.PlayerToAttack:
+                    break;
+                case BattleState.PlayerAttacking:
+                    break;
+                case BattleState.EnemiesMoving:
+                    break;
+                case BattleState.EnemiesAttacking:
+                    break;
+                case BattleState.EndAnimation:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

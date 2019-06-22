@@ -14,7 +14,7 @@ namespace Player {
         {
             get
             {
-                var inventory = GameManager.Instance.PlayerInventory;
+                var inventory = GameManager.Instance.playerInventory;
 
                 var damage = 0;
                 if (inventory.CurrentWeapon != null) damage += inventory.CurrentWeapon.Damage;
@@ -29,7 +29,7 @@ namespace Player {
         {
             get
             {
-                var inventory = GameManager.Instance.PlayerInventory;
+                var inventory = GameManager.Instance.playerInventory;
 
                 var movement = this.BaseMovement;
                 if (inventory.CurrentWeapon != null) movement += inventory.CurrentWeapon.Movement;

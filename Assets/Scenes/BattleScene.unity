@@ -229,6 +229,14 @@ MonoBehaviour:
     type: 3}
   BattlePlayerPrefab: {fileID: 5779783812757664401, guid: 7bc3b7495873d974a9c64dda7e773c19,
     type: 3}
+  CursorPrefab: {fileID: 6388982601925338717, guid: 7b6323e1e3f40744ba7325d761be1721,
+    type: 3}
+  fieldWidth: 8
+  fieldHeight: 8
+  enemySpawnWidth: 2
+  playerSpawnWidth: 2
+  Enemies: []
+  PlayerWalkable: []
 --- !u!4 &1025255452
 Transform:
   m_ObjectHideFlags: 0

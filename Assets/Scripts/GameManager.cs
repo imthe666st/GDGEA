@@ -2,6 +2,8 @@
 
 using Camera;
 
+using DefaultNamespace;
+
 using Equipment;
 
 using Player;
@@ -14,7 +16,8 @@ public class GameManager : MonoBehaviour
 	public static GameManager Instance = null;
 
 	public bool isPaused = false;
-	public Inventory PlayerInventory;
+	public Inventory playerInventory;
+	public Difficulty difficulty = Difficulty.Normal;
 
 	[HideInInspector]
 	public OverworldPlayer OverWorldPlayer;
@@ -26,6 +29,10 @@ public class GameManager : MonoBehaviour
 	public Battlefield Battlefield;
 	[HideInInspector]
 	public LevelData LevelData;
+	[HideInInspector]
+	public BattleState BattleState = BattleState.PlayerToMove;
+	[HideInInspector]
+	public CursorController Cursor = null;
 
 	private void Awake()
 	{
@@ -57,7 +64,8 @@ public class GameManager : MonoBehaviour
 	public void StartBattle()
 	{
 		this.isPaused = true;
-
+		this.BattleState = BattleState.PlayerToMove;
+		
 		SceneManager.LoadScene("BattleScene", LoadSceneMode.Additive);
 		this.CameraController.cameraMode = CameraMode.Static;
 	}
