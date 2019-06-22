@@ -109,7 +109,7 @@ namespace Battle {
 
 		private void ProcessSelectionInput()
 		{
-			if (Input.GetButtonDown("Fire1"))
+			if (Input.GetButtonDown("Select"))
 			{
 
 				switch (GameManager.Instance.BattleState)
@@ -124,6 +124,21 @@ namespace Battle {
 						break;
 					
 					case BattleState.PlayerMoving:
+						break;
+				}
+			}
+			else if (Input.GetButtonDown("Deselect"))
+			{
+				switch (GameManager.Instance.BattleState)
+				{
+					case BattleState.PlayerMoving:
+
+						//Check if highlighting Player
+						if (Mathf.Abs((this.transform.position - GameManager.Instance.BattlePlayer.transform.position).magnitude) <= 0.1f)
+						{
+							GameManager.Instance.BattleState           = BattleState.PlayerToMove;
+							this.GetComponent<SpriteRenderer>().sprite = this.Idle;
+						}
 						break;
 				}
 			}
