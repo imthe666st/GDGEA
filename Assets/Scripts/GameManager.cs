@@ -8,6 +8,8 @@ using DefaultNamespace;
 
 using Equipment;
 
+using Marker;
+
 using Player;
 
 using UnityEngine;
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
 	public Inventory playerInventory;
 	public Difficulty difficulty = Difficulty.Normal;
 	public Material MonoChrome;
+	public Stats stats;
 	
 	[HideInInspector]
 	public OverworldPlayer OverWorldPlayer;
@@ -39,6 +42,11 @@ public class GameManager : MonoBehaviour
 	[HideInInspector]
 	public CursorController Cursor = null;
 
+	[HideInInspector]
+	public HealthMarker HealthMarker = null;
+	[HideInInspector]
+	public WeaponMarker WeaponMarker = null;
+	
 	private void Awake()
 	{
 		if (Instance == null)

@@ -141,7 +141,8 @@ namespace Battle {
             var playerPos = player.transform.position;
             
             var walkableTiles = new List<FieldTile>();
-            this.Tiles[this.fieldHeight * (int)playerPos.x + (int)playerPos.y].PlayerWalk(player.Movement + 1, 
+            this.Tiles[this.fieldHeight * (int)playerPos.x + (int)playerPos.y].PlayerWalk(GameManager.Instance.stats
+            .Movement + 1, 
             walkableTiles, new List<FieldTile>());
 
             this.PlayerWalkable = walkableTiles;
@@ -190,13 +191,13 @@ namespace Battle {
                 var distance = Mathf.Abs(playerTile.transform.position.x - tile.transform.position.x) 
                                + Mathf.Abs(playerTile.transform.position.y - tile.transform.position.y);
 
-                if (distance > GameManager.Instance.BattlePlayer.MinDistance && distance <= GameManager.Instance.BattlePlayer.MaxDistance)
+                if (distance > GameManager.Instance.stats.MinDistance && distance <= GameManager.Instance.stats.MaxDistance)
                 {
                     tile.TileStatus |= TileStatus.PlayerAttackable;
                     attackable.Add(tile);
                 }
 
-                if (distance < GameManager.Instance.BattlePlayer.MaxDistance)
+                if (distance < GameManager.Instance.stats.MaxDistance)
                 {
                     if (tile.UpNeighbor != null) checkqueue.Enqueue(tile.UpNeighbor);
                     if (tile.DownNeighbor != null) checkqueue.Enqueue(tile.DownNeighbor);
