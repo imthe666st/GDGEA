@@ -93,6 +93,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf741fda5017d2047ab895c0cb430d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UpNeighbor: {fileID: 0}
+  DownNeighbor: {fileID: 0}
+  RightNeighbor: {fileID: 0}
+  LeftNeighbor: {fileID: 0}
+  Normal: {fileID: 8765691434194812446, guid: 605a10323495f6d479fe87fbaed1b7f9, type: 3}
+  Walkable: {fileID: -4935515234372044099, guid: 605a10323495f6d479fe87fbaed1b7f9,
+    type: 3}
+  PlayerAttackable: {fileID: -2567394753100121192, guid: 605a10323495f6d479fe87fbaed1b7f9,
+    type: 3}
+  EnemyAttackable: {fileID: 4102035746892528945, guid: 605a10323495f6d479fe87fbaed1b7f9,
+    type: 3}
+  WalkableEnemyAttackable: {fileID: 3480680122843634524, guid: 605a10323495f6d479fe87fbaed1b7f9,
+    type: 3}
+  PlayerAttackableEnemyAttackable: {fileID: -5385939030215686190, guid: 605a10323495f6d479fe87fbaed1b7f9,
+    type: 3}
 --- !u!61 &9086172713175528381
 BoxCollider2D:
   m_ObjectHideFlags: 0

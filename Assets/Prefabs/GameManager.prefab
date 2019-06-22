@@ -43,3 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1890890db70964eafc0768be33fbf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPaused: 0
+  PlayerInventory: {fileID: 11400000, guid: d2d7774aa25c44d47b91d2376286d8e9, type: 2}
+  OverWorldPlayer: {fileID: 0}
+  BattlePlayer: {fileID: 0}
+  CameraController: {fileID: 0}
+  Battlefield: {fileID: 0}
+  LevelData: {fileID: 0}
