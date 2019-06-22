@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
 
 namespace Player {
+    using System;
+
+    using Battle;
+
+    using DG.Tweening;
+
     public class BattlePlayer : MonoBehaviour
     {
         public int BaseMovement = 2;
+
+        public FieldTile PositionTile;
+
+        public float MoveTime = 0.2f;
         
         private void Awake()
         {
@@ -39,6 +49,45 @@ namespace Player {
                 
                 return movement;
             }
+        }
+
+        public void MoveToTile(FieldTile target)
+        {
+            var tempPlayerpos = this.PositionTile;
+
+            var mv = DOTween.Sequence();
+
+            while (tempPlayerpos != target)
+            {
+                var toMove = target.transform.position.ClearZ() - tempPlayerpos.transform.position.ClearZ();
+
+                if (toMove.x > toMove.y)
+                {
+                    if (Mathf.Abs(toMove.x) > float.Epsilon)
+                        tempPlayerpos = this.CreateXMove(mv, toMove.x, tempPlayerpos);
+                }
+                else
+                {
+                    if (Mathf.Abs(toMove.y) > float.Epsilon)
+                        tempPlayerpos = this.CreateYMove(mv, toMove.y, tempPlayerpos);
+                }
+            }
+
+            this.PositionTile = target;
+        }
+
+        private FieldTile CreateYMove(Sequence sq, float yDiff, FieldTile playerPos)
+        {
+            var targetTile = yDiff < 0 ? playerPos.DownNeighbor : playerPos.UpNeighbor;
+            sq.Append(this.transform.DOMove(targetTile.transform.position.ClearZ() + this.transform.position.OnlyZ(), this.MoveTime));
+            return targetTile;
+        }
+
+        private FieldTile CreateXMove(Sequence sq, float xDiff, FieldTile playerPos)
+        {
+            var targetTile = xDiff < 0 ? playerPos.LeftNeighbor : playerPos.RightNeighbor;
+            sq.Append(this.transform.DOMove(targetTile.transform.position.ClearZ() + this.transform.position.OnlyZ(), this.MoveTime));
+            return targetTile;
         }
     }
 }

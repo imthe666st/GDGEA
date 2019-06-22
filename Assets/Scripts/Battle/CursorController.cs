@@ -17,7 +17,11 @@ namespace Battle {
 		public Sprite Selected;
 		public float MoveTime = 0.2f;
 
+		protected bool PlayerCanMove = false;
+
 		protected FieldTile PosTile;
+
+		protected FieldTile PlayerOldTile;
 
 		private void Start()
 		{
@@ -120,10 +124,18 @@ namespace Battle {
 						{
 							GameManager.Instance.BattleState           = BattleState.PlayerMoving;
 							this.GetComponent<SpriteRenderer>().sprite = this.Selected;
+							this.PlayerOldTile = this.PosTile;
+							this.PlayerCanMove = true;
 						}
 						break;
 					
 					case BattleState.PlayerMoving:
+
+						if (this.PlayerCanMove)
+						{
+							GameManager.Instance.BattlePlayer.MoveToTile(this.PosTile);
+							this.PlayerCanMove = false;
+						}
 						
 						break;
 				}
@@ -134,12 +146,14 @@ namespace Battle {
 				{
 					case BattleState.PlayerMoving:
 
-						//Check if highlighting Player
-						if (Mathf.Abs((this.transform.position - GameManager.Instance.BattlePlayer.transform.position).magnitude) <= 0.1f)
-						{
-							GameManager.Instance.BattleState           = BattleState.PlayerToMove;
-							this.GetComponent<SpriteRenderer>().sprite = this.Idle;
-						}
+						GameManager.Instance.BattleState           = BattleState.PlayerToMove;
+						this.GetComponent<SpriteRenderer>().sprite = this.Idle;
+
+						this.transform.position = this.PlayerOldTile.transform.position.ClearZ() + this.transform
+																									   .position
+																									   .OnlyZ();
+						this.PosTile       = this.PlayerOldTile;
+						this.PlayerOldTile = null;
 						break;
 				}
 			}

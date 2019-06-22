@@ -103,7 +103,8 @@ namespace Battle {
             var value = Random.Range(0, this.fieldHeight * this.playerSpawnWidth);
             var pos = this.Tiles[value].transform.position - new Vector3(0, 0, 0.1f);
 
-            Instantiate(this.BattlePlayerPrefab, pos, Quaternion.identity, this.transform);
+            var player = Instantiate(this.BattlePlayerPrefab, pos, Quaternion.identity, this.transform);
+            player.PositionTile = this.Tiles[value];
             
             this.UpdateTilesPlayerWalk();
         }
