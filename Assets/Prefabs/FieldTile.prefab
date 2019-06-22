@@ -93,6 +93,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf741fda5017d2047ab895c0cb430d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UpNeighbor: {fileID: 0}
+  DownNeighbor: {fileID: 0}
+  RightNeighbor: {fileID: 0}
+  LeftNeighbor: {fileID: 0}
+  Normal: {fileID: 21300000, guid: baf7d7355db11fe4ba56e6be25493f24, type: 3}
+  Walkable: {fileID: 0}
+  PlayerAttackable: {fileID: 0}
+  EnemyAttackable: {fileID: 0}
+  WalkableEnemyAttackable: {fileID: 0}
+  PlayerAttackableEnemyAttackable: {fileID: 0}
 --- !u!61 &9086172713175528381
 BoxCollider2D:
   m_ObjectHideFlags: 0

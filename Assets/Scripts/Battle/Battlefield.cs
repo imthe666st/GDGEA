@@ -8,6 +8,8 @@ namespace Battle {
 
     using Enemy;
 
+    using Player;
+
     public class Battlefield : MonoBehaviour
     {
         public FieldTile FieldTilePrefab;
@@ -34,7 +36,11 @@ namespace Battle {
             this.Tiles = new FieldTile[this.fieldWidth * this.fieldHeight];
             
             this.GenerateField();
-
+            foreach (var tile in this.Tiles)
+            {
+                tile.Reset();
+            }
+            
             this.EnemySpawnTiles = this.Tiles.Skip((this.fieldWidth - this.enemySpawnWidth) * this.fieldHeight).ToList();
             
             this.SpawnPlayer();
@@ -103,6 +109,17 @@ namespace Battle {
         public void RegisterEnemy(Enemy enemy)
         {
             this.Enemies.Add(enemy);
+        }
+
+        public void UpdateTilesPlayerWalk()
+        {
+            foreach (var tile in this.Tiles) tile.Reset();
+
+            var player = GameManager.Instance.BattlePlayer;
+            var playerPos = player.transform.position;
+            
+            var walkableTiles = new List<FieldTile>();
+            this.Tiles[(int)playerPos.y * (int)playerPos.x].PlayerWalk(player.Movement, walkableTiles);
         }
     }
 }

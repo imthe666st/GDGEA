@@ -2,6 +2,8 @@
 
 using Camera;
 
+using Equipment;
+
 using Player;
 
 using UnityEngine;
@@ -12,6 +14,7 @@ public class GameManager : MonoBehaviour
 	public static GameManager Instance = null;
 
 	public bool isPaused = false;
+	public Inventory PlayerInventory;
 
 	[HideInInspector]
 	public OverworldPlayer OverWorldPlayer;

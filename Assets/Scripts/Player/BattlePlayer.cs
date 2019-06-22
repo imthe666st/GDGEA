@@ -1,9 +1,43 @@
 ﻿using UnityEngine;
 
-public class BattlePlayer : MonoBehaviour
-{
-    private void Awake()
+namespace Player {
+    public class BattlePlayer : MonoBehaviour
     {
-        GameManager.Instance.BattlePlayer = this;
+        public int BaseMovement = 2;
+        
+        private void Awake()
+        {
+            GameManager.Instance.BattlePlayer = this;
+        }
+
+        public int Damage
+        {
+            get
+            {
+                var inventory = GameManager.Instance.PlayerInventory;
+
+                var damage = 0;
+                if (inventory.CurrentWeapon != null) damage += inventory.CurrentWeapon.Damage;
+                if (inventory.CurrentModifier1 != null) damage += inventory.CurrentModifier1.Damage;
+                if (inventory.CurrentModifier2 != null) damage += inventory.CurrentModifier2.Damage;
+                
+                return damage;
+            }
+        }
+
+        public int Movement
+        {
+            get
+            {
+                var inventory = GameManager.Instance.PlayerInventory;
+
+                var movement = this.BaseMovement;
+                if (inventory.CurrentWeapon != null) movement += inventory.CurrentWeapon.Movement;
+                if (inventory.CurrentModifier1 != null) movement += inventory.CurrentModifier1.Movement;
+                if (inventory.CurrentModifier2 != null) movement += inventory.CurrentModifier2.Movement;
+                
+                return movement;
+            }
+        }
     }
 }
