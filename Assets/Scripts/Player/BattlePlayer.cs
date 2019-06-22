@@ -165,7 +165,7 @@ namespace Player {
                 }
             }
 
-            mv.OnComplete(() => { GameManager.Instance.Battlefield.EnemyCanMove = true; });
+            //mv.OnComplete(() => { GameManager.Instance.Battlefield.EnemyCanMove = true; });
             
             this.PositionTile = target;
         }
@@ -204,6 +204,12 @@ namespace Player {
                                          .Enemies.Shuffle();
                               GameManager.Instance.Battlefield
                                          .PlayerAttackable.Clear();
+
+                              var sq = DOTween.Sequence().AppendInterval(this.MoveTime * 2)
+                                              .AppendCallback(() =>
+                                                              {
+                                                                  GameManager.Instance.Battlefield.EnemyCanMove = true;
+                                                              });
                           });
 
             var moveEnemy = DOTween.Sequence();
@@ -239,6 +245,12 @@ namespace Player {
         {
             this.health -= damage;
 
+            var di = Instantiate(GameManager.Instance.Battlefield.DamageIndicatorPrefab,
+                                 this.transform.position - Vector3.forward, Quaternion.identity,
+                                 GameManager.Instance.Battlefield.transform);
+            di.SetValue(damage.ToString());
+            
+            
             if (this.health <= 0)
             {
                 //TODO: DIE

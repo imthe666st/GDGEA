@@ -44,9 +44,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
-  PlayerInventory: {fileID: 11400000, guid: d2d7774aa25c44d47b91d2376286d8e9, type: 2}
+  playerInventory: {fileID: 11400000, guid: d2d7774aa25c44d47b91d2376286d8e9, type: 2}
+  difficulty: 1
+  DamageIndicator: {fileID: 3572529616606475159, guid: f9baf3923a15d3c42b1548c7202f16dc,
+    type: 3}
   OverWorldPlayer: {fileID: 0}
   BattlePlayer: {fileID: 0}
   CameraController: {fileID: 0}
   Battlefield: {fileID: 0}
   LevelData: {fileID: 0}
+  BattleState: 0
+  Cursor: {fileID: 0}

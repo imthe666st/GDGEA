@@ -76,8 +76,15 @@ public class GameManager : MonoBehaviour
 		this.Battlefield = null;
 
 		this.CameraController.cameraMode = CameraMode.FollowPlayer;
-		
-		//TODO: DROP STUFF
+
+		SceneManager.UnloadSceneAsync("BattleScene");
+
+		if (this.LevelData.LootPool.CanGetLoot())
+		{
+			var loot = this.LevelData.LootPool.GetRandomLoot();
+			
+			this.playerInventory.CollectedModifier.Add(Instantiate(loot));
+		}
 
 		this.isPaused = false;
 	}

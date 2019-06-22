@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32f801e263ec37c4198f70c32cbb60be, type: 3}
+  m_Script: {fileID: 11500000, guid: e178ea6cb1b445088b554b33e6b8e7d3, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  pool:
-  - data: {fileID: 9029106970578584346, guid: 43e9690478b1ef241b6522f9fe1ca8e7, type: 3}
+  Loot:
+  - Loot: {fileID: 11400000, guid: 4148264e67f76204cabb44cde5b74ae6, type: 2}
+    Chance: 2
+  - Loot: {fileID: 11400000, guid: bcdcdf610e49cef4fb5a1bb9c1bb421f, type: 2}
+    Chance: 2
+  GlobalLootChance: 0.4

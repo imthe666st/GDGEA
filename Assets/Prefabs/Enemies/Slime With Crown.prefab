@@ -96,6 +96,9 @@ MonoBehaviour:
   minDistance: 1
   maxDistance: 2
   movement: 0
-  health: 2
+  health: 5
   critDamage: 0
   critChance: 0
+  MoveTime: 0.3
+  AttackTime: 0.2
+  PositionTile: {fileID: 0}

@@ -9,6 +9,8 @@ namespace Enemy {
 
 	using Player;
 
+	using UnityEngine.SceneManagement;
+
 	public abstract class Enemy : MonoBehaviour
 	{
 		public abstract EnemyType Type { get; }
@@ -60,6 +62,13 @@ namespace Enemy {
 		public void TakeDamage(int damage)
 		{
 			this.health -= damage;
+
+			var di = Instantiate(GameManager.Instance.Battlefield.DamageIndicatorPrefab, GameManager.Instance
+																									.Battlefield
+																									.transform
+								 );
+			di.transform.localPosition = this.transform.localPosition;
+			di.SetValue(damage.ToString());
 
 			if (this.Health <= 0)
 			{

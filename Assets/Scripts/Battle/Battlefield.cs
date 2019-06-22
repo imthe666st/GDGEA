@@ -7,8 +7,6 @@ namespace Battle {
 
     using Camera;
 
-    using DefaultNamespace;
-
     using Enemy;
 
     using Player;
@@ -21,6 +19,7 @@ namespace Battle {
         public StaticCameraMarker CameraMarkerPrefab;
         public BattlePlayer BattlePlayerPrefab;
         public CursorController CursorPrefab;
+        public DamageIndicator DamageIndicatorPrefab;
 
         public int fieldWidth = 8;
         public int fieldHeight = 8;
