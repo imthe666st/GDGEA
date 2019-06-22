@@ -1,32 +1,48 @@
 ﻿using UnityEngine;
 
 namespace Battle {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     using Camera;
 
+    using DefaultNamespace;
+
     using Enemy;
 
     using Player;
+
+    using Random = Random;
 
     public class Battlefield : MonoBehaviour
     {
         public FieldTile FieldTilePrefab;
         public StaticCameraMarker CameraMarkerPrefab;
         public BattlePlayer BattlePlayerPrefab;
+        public CursorController CursorPrefab;
 
         public int fieldWidth = 8;
         public int fieldHeight = 8;
         public int enemySpawnWidth = 2;
         public int playerSpawnWidth = 2;
         
-        protected FieldTile[] Tiles;
+        public FieldTile[] Tiles;
 
         protected List<FieldTile> EnemySpawnTiles;
 
         [HideInInspector]
         public List<Enemy> Enemies;
+
+        public List<FieldTile> PlayerWalkable;
+        public List<FieldTile> PlayerAttackable;
+        public Queue<Enemy> EnemiesToMove = new Queue<Enemy>();
+        public bool EnemyCanMove = false;
+        public int EnemyMovedCounter = 0;
+
+        public Queue<Enemy> EnemiesToAttack = new Queue<Enemy>();
+        public bool EnemyCanAttack = false;
+        public int EnemyAttackedCounter = 0;
         
         private void Awake()
         {
@@ -45,6 +61,8 @@ namespace Battle {
             
             this.SpawnPlayer();
             this.SpawnEnemies();
+            
+            this.UpdateBattle();
         }
 
         private void GenerateField()
@@ -84,6 +102,8 @@ namespace Battle {
         private void SpawnEnemies()
         {
             GameManager.Instance.LevelData.EnemyPool.GetRandom().Spawn(this);
+            
+            //this.UpdateTilesEnemyAttack();
         }
 
         private void SpawnPlayer()
@@ -91,9 +111,10 @@ namespace Battle {
             var value = Random.Range(0, this.fieldHeight * this.playerSpawnWidth);
             var pos = this.Tiles[value].transform.position - new Vector3(0, 0, 0.1f);
 
-            Instantiate(this.BattlePlayerPrefab, pos, Quaternion.identity, this.transform);
+            var player = Instantiate(this.BattlePlayerPrefab, pos, Quaternion.identity, this.transform);
+            player.PositionTile = this.Tiles[value];
             
-            this.UpdateTilesPlayerWalk();
+            //this.UpdateTilesPlayerWalk();
         }
         
         public bool CanSpawnEnemy() => this.EnemySpawnTiles.Count > 0;
@@ -116,13 +137,172 @@ namespace Battle {
         public void UpdateTilesPlayerWalk()
         {
             foreach (var tile in this.Tiles) tile.Reset();
-
+            
             var player = GameManager.Instance.BattlePlayer;
             var playerPos = player.transform.position;
             
             var walkableTiles = new List<FieldTile>();
             this.Tiles[this.fieldHeight * (int)playerPos.x + (int)playerPos.y].PlayerWalk(player.Movement + 1, 
-            walkableTiles);
+            walkableTiles, new List<FieldTile>());
+
+            this.PlayerWalkable = walkableTiles;
+        }
+
+        /*public void UpdateTilesEnemyAttack()
+        {
+            foreach (var enemy in this.Enemies)
+            {
+                var enemyPos = enemy.transform.position;
+
+                var attackAbleTiles = new List<FieldTile>();
+                this.Tiles[this.fieldHeight * (int) enemyPos.x + (int) enemyPos.y].EnemyAttack(enemy.MinDistance
+                                                                                               + 2,
+                                                                                               enemy.MaxDistance +
+                                                                                               2, 
+                                                                                               GameManager.Instance
+                                                                                               .difficulty == Difficulty.Easy,
+                                                                                               attackAbleTiles, new List<FieldTile>());
+            }
+        }*/
+
+        public void UpdateTilesPlayerAttack()
+        {
+            foreach (var tile in this.Tiles)
+            {
+                tile.ResetPlayerWalk();
+            }
+
+            var attackable = new List<FieldTile>();
+            
+            var checkqueue = new Queue<FieldTile>();
+            
+            var playerTile = GameManager.Instance.BattlePlayer.PositionTile;
+            checkqueue.Enqueue(playerTile);
+
+            var checkedTiles = new List<FieldTile>();
+            
+            while (checkqueue.Count > 0)
+            {
+                var tile = checkqueue.Dequeue();
+
+                if (checkedTiles.Contains(tile))
+                    continue;
+                
+                var distance = Mathf.Abs(playerTile.transform.position.x - tile.transform.position.x) 
+                               + Mathf.Abs(playerTile.transform.position.y - tile.transform.position.y);
+
+                if (distance > GameManager.Instance.BattlePlayer.MinDistance && distance <= GameManager.Instance.BattlePlayer.MaxDistance)
+                {
+                    tile.TileStatus |= TileStatus.PlayerAttackable;
+                    attackable.Add(tile);
+                }
+
+                if (distance < GameManager.Instance.BattlePlayer.MaxDistance)
+                {
+                    if (tile.UpNeighbor != null) checkqueue.Enqueue(tile.UpNeighbor);
+                    if (tile.DownNeighbor != null) checkqueue.Enqueue(tile.DownNeighbor);
+                    if (tile.LeftNeighbor != null) checkqueue.Enqueue(tile.LeftNeighbor);
+                    if (tile.RightNeighbor != null) checkqueue.Enqueue(tile.RightNeighbor);
+
+                }
+            }
+            
+            this.PlayerAttackable = attackable;
+            GameManager.Instance.Cursor.PlayerAttackable = attackable;
+        }
+
+        private void Update()
+        {
+            this.UpdateBattle();
+
+            if (this.Enemies.Count == 0)
+            {
+                GameManager.Instance.EndBattle();
+            }
+        }
+
+        public void UpdateBattle()
+        {
+            switch (GameManager.Instance.BattleState)
+            {
+                case BattleState.PlayerToMove:
+                    if (GameManager.Instance.Cursor == null)
+                    {
+                        GameManager.Instance.Cursor = Instantiate(this.CursorPrefab, GameManager.Instance
+                                                                                                .BattlePlayer.transform
+                                                                                                .position -
+                                                                                     new Vector3(0, 0, 0.1f),
+                                                                  Quaternion.identity, this.transform);
+                        this.UpdateTilesPlayerWalk();
+                        
+                        GameManager.Instance.Cursor.Moveable      = true;
+                        GameManager.Instance.Cursor.PlayerMovable = this.PlayerWalkable;
+                    }
+                    break;
+                case BattleState.PlayerMoving:
+                    break;
+                case BattleState.PlayerToAttack:
+                    break;
+                case BattleState.PlayerAttacking:
+                    break;
+                case BattleState.EnemiesMoving:
+                    this.MoveEnemies();
+                    break;
+                case BattleState.EnemiesAttacking:
+                    this.AttackOfEnemies();
+                    break;
+                case BattleState.EndAnimation:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        
+        public void MoveEnemies()
+        {
+            if (!this.EnemyCanMove)
+                return;
+
+            if (this.EnemyMovedCounter >= this.Enemies.Count)
+            {
+                this.EnemyMovedCounter = 0;
+                this.EnemiesToMove.Clear();
+                this.EnemyCanMove = false;
+                GameManager.Instance.BattleState = BattleState.EnemiesAttacking;
+                this.EnemyCanAttack = true;
+                return;
+            }
+            
+            if (this.EnemiesToMove.Count == 0)
+                foreach (var enemy in this.Enemies)
+                    this.EnemiesToMove.Enqueue(enemy);
+
+            var moving = this.EnemiesToMove.Dequeue();
+            this.EnemyCanMove = !moving.Move();
+            this.EnemyMovedCounter++;
+        }
+
+        public void AttackOfEnemies()
+        {
+            if (!this.EnemyCanAttack)
+                return;
+
+            if (this.EnemyAttackedCounter >= this.Enemies.Count)
+            {
+                this.EnemyAttackedCounter = 0;
+                this.EnemiesToAttack.Clear();
+                this.EnemyCanAttack = false;
+                GameManager.Instance.BattleState = BattleState.PlayerToMove;
+                return;
+            }
+
+            if (this.EnemiesToMove.Count == 0)
+                foreach (var enemy in this.Enemies)
+                    this.EnemiesToAttack.Enqueue(enemy);
+
+            var attacking = this.EnemiesToAttack.Dequeue();
+            this.EnemyCanAttack = !attacking.Attack();
+            this.EnemyAttackedCounter++;
         }
     }
 }

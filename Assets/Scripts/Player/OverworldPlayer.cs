@@ -6,6 +6,8 @@ using DG.Tweening;
 using UnityEngine;
 
 namespace Player {
+	using System.Linq;
+
 	public class OverworldPlayer : PausableObject
 	{
 		public bool  CanMove  = true;
@@ -18,7 +20,7 @@ namespace Player {
 		private void Awake()
 		{
 			GameManager.Instance.OverWorldPlayer = this;
-			
+
 			this._rigidbody2D = this.GetComponent<Rigidbody2D>();
 			this._castHits    = new List<RaycastHit2D>();
 		}
@@ -82,6 +84,12 @@ namespace Player {
 			this._castHits.Clear();
 			var hits = this._rigidbody2D.Cast(targetPos, this._castHits, targetPos.magnitude);
 
+			var filtered = this._castHits.Where(h => h.collider.isTrigger).ToList();
+
+			hits -= filtered.Count;
+
+			this._castHits = this._castHits.Except(filtered).ToList();
+			
 			if (hits > 0)
 				return false;
 

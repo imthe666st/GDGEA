@@ -27007,9 +27007,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1277243182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82c5e13ce65573e43ab00467ea6cab8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 499d7b1bbc21b2e48968bf4de855be48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gates: []
 --- !u!212 &1277243184
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28464,6 +28465,10 @@ PrefabInstance:
       propertyPath: encounterChance
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 871640098, guid: 007d622b2a8c3f940b0235d212b4ac61, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c13da146a181694fa2dcbe3716ff941, type: 3}
 --- !u!1001 &1313957389709535832
@@ -28776,6 +28781,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2678792996865019429, guid: a8d1595926d33a64ea3ca00209023fd2,
+        type: 3}
+      propertyPath: playerInventory
+      value: 
+      objectReference: {fileID: 11400000, guid: d2d7774aa25c44d47b91d2376286d8e9,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8d1595926d33a64ea3ca00209023fd2, type: 3}
 --- !u!1001 &9018732344636747248
