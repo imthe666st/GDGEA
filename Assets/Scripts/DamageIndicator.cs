@@ -20,7 +20,7 @@ public class DamageIndicator : MonoBehaviour
 
     public void SetValue(string value)
     {
-        this.text.text = value;
+        this.text.text = "-" + value;
     }
     
     void Update()

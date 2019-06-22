@@ -13,9 +13,9 @@ public static class ShaderStateExt {
 		switch (state)
 		{
 			case ShaderState.None:
-				return 0.2f;
+				return 0.1f;
 			case ShaderState.Half:
-				return 0.6f;
+				return 0.4f;
 			case ShaderState.Complete:
 				return 1f;
 			default:

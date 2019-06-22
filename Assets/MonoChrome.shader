@@ -5,7 +5,6 @@
 		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
 		_Color ("Tint", Color) = (1,1,1,1)
 		[MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
-		_MonoChrome ("MonoChrome", Color) = (1, 1, 1, 1)
 		_Status ("Status", Float) = 0.0
 	}
 
@@ -48,7 +47,6 @@
 			};
 			
 			fixed4 _Color;
-			fixed4 _MonoChrome;
 			float _Status;
 
 			v2f vert(appdata_t IN)
@@ -71,7 +69,13 @@
 			fixed4 SampleSpriteTexture (float2 uv)
 			{
 				fixed4 color = tex2D (_MainTex, uv);
-                color = lerp(_MonoChrome, color, _Status);
+				//0.3 r + 0,59 g + 0,11 b
+				fixed4 greyscale = color;
+				greyscale.r = 0.3 * color.r + 0.59 * color.g + 0.11 * color.b;
+				greyscale.g = greyscale.r;
+				greyscale.b = greyscale.r;
+				
+                color = lerp(greyscale, color, _Status);
                 
 #if UNITY_TEXTURE_ALPHASPLIT_ALLOWED
 				if (_AlphaSplitEnabled)
