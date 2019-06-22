@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72778f9b71c6497cb8812f0887c2854e, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
+  representation: {fileID: 21300000, guid: 05ae795e997c03f4ba4f3889ac408ddf, type: 3}
   damage: 1
   minDistance: 1
   maxDistance: 3
