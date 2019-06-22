@@ -14,6 +14,7 @@ namespace Player {
         public FieldTile PositionTile;
 
         public float MoveTime = 0.2f;
+        public float AttackTime = 0.1f;
         
         private void Awake()
         {
@@ -51,6 +52,38 @@ namespace Player {
             }
         }
 
+        public int MinDistance
+        {
+            get
+            {
+                var inventory = GameManager.Instance.playerInventory;
+
+                var minDistance = 0;
+
+                if (inventory.CurrentWeapon != null) minDistance += inventory.CurrentWeapon.MinDistance;
+                if (inventory.CurrentModifier1 != null) minDistance += inventory.CurrentModifier1.MinDistance;
+                if (inventory.CurrentModifier2 != null) minDistance += inventory.CurrentModifier2.MinDistance;
+
+                return minDistance;
+            }
+        }
+
+        public int MaxDistance
+        {
+            get
+            {
+                var inventory = GameManager.Instance.playerInventory;
+
+                var maxDistance = 0;
+                
+                if (inventory.CurrentWeapon != null) maxDistance    += inventory.CurrentWeapon.MaxDistance;
+                if (inventory.CurrentModifier1 != null) maxDistance += inventory.CurrentModifier1.MaxDistance;
+                if (inventory.CurrentModifier2 != null) maxDistance += inventory.CurrentModifier2.MaxDistance;
+
+                return maxDistance;
+            }
+        }
+        
         public void MoveToTile(FieldTile target)
         {
             var tempPlayerpos = this.PositionTile;
@@ -88,6 +121,22 @@ namespace Player {
             var targetTile = xDiff < 0 ? playerPos.LeftNeighbor : playerPos.RightNeighbor;
             sq.Append(this.transform.DOMove(targetTile.transform.position.ClearZ() + this.transform.position.OnlyZ(), this.MoveTime));
             return targetTile;
+        }
+
+        public void Attack(FieldTile tile)
+        {
+            var mv = DOTween.Sequence();
+            var pos = this.transform.position;
+
+            var dir = tile.transform.position - pos;
+            dir.Normalize();
+
+            mv.Append(this.transform.DOMove(pos + 0.5f * dir, this.AttackTime))
+              .Append(this.transform.DOMove(pos, this.AttackTime)).OnComplete(() =>
+                                                                            {
+                                                                                GameManager.Instance.BattleState =
+                                                                                    BattleState.EnemiesMoving;
+                                                                            });
         }
     }
 }

@@ -82,9 +82,14 @@ namespace Battle {
 			this.TileStatus = TileStatus.Normal;
 		}
 
-		public void ResetPlayerAttack()
+		public void ResetPlayerWalk()
 		{
 			this.TileStatus &= ~TileStatus.Walkable;
+		}
+
+		public void ResetPlayerAttack()
+		{
+			this.TileStatus &= ~TileStatus.PlayerAttackable;
 		}
 
 		public void TileStatusChanged()
@@ -146,6 +151,42 @@ namespace Battle {
 				this.LeftNeighbor.PlayerWalk(remaining - 1, walkable, checkedTiles);
 			if (this.RightNeighbor != null)
 				this.RightNeighbor.PlayerWalk(remaining - 1, walkable, checkedTiles);
+		}
+
+		public void PlayerAttack(int min, int max, List<FieldTile> attackable, List<FieldTile> checkedTiles)
+		{
+			if (checkedTiles.Contains(this))
+				return;
+			
+			checkedTiles.Add(this);
+
+			min--;
+			max--;
+
+			if (min > 0)
+			{
+				if (this.UpNeighbor != null) this.UpNeighbor.PlayerAttack(min, max, attackable, checkedTiles);
+				if (this.DownNeighbor != null) this.DownNeighbor.PlayerAttack(min, max, attackable, checkedTiles);
+				if (this.LeftNeighbor != null) this.LeftNeighbor.PlayerAttack(min, max, attackable, checkedTiles);
+				if (this.RightNeighbor != null) this.RightNeighbor.PlayerAttack(min, max, attackable, checkedTiles);
+				
+				return;
+			}
+
+			if (max == 0)
+				return;
+
+			attackable.Add(this);
+
+			this.TileStatus |= TileStatus.PlayerAttackable;
+			
+			if (max - 1 == 0)
+				return;
+			
+			if (this.UpNeighbor != null) this.UpNeighbor.PlayerAttack(min, max, attackable, checkedTiles);
+			if (this.DownNeighbor != null) this.DownNeighbor.PlayerAttack(min, max, attackable, checkedTiles);
+			if (this.LeftNeighbor != null) this.LeftNeighbor.PlayerAttack(min, max, attackable, checkedTiles);
+			if (this.RightNeighbor != null) this.RightNeighbor.PlayerAttack(min, max, attackable, checkedTiles);
 		}
 
 		public void EnemyAttack(int min, int max,bool draw ,List<FieldTile> attackable, List<FieldTile> checkedTiles)

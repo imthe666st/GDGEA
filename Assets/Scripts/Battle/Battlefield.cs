@@ -35,6 +35,7 @@ namespace Battle {
         public List<Enemy> Enemies;
 
         public List<FieldTile> PlayerWalkable;
+        public List<FieldTile> PlayerAttackable;
         
         private void Awake()
         {
@@ -157,6 +158,52 @@ namespace Battle {
             }
         }
 
+        public void UpdateTilesPlayerAttack()
+        {
+            foreach (var tile in this.Tiles)
+            {
+                tile.ResetPlayerWalk();
+            }
+
+            var attackable = new List<FieldTile>();
+            
+            var checkqueue = new Queue<FieldTile>();
+            
+            var playerTile = GameManager.Instance.BattlePlayer.PositionTile;
+            checkqueue.Enqueue(playerTile);
+
+            var checkedTiles = new List<FieldTile>();
+            
+            while (checkqueue.Count > 0)
+            {
+                var tile = checkqueue.Dequeue();
+
+                if (checkedTiles.Contains(tile))
+                    continue;
+                
+                var distance = Mathf.Abs(playerTile.transform.position.x - tile.transform.position.x) 
+                               + Mathf.Abs(playerTile.transform.position.y - tile.transform.position.y);
+
+                if (distance > GameManager.Instance.BattlePlayer.MinDistance && distance <= GameManager.Instance.BattlePlayer.MaxDistance)
+                {
+                    tile.TileStatus |= TileStatus.PlayerAttackable;
+                    attackable.Add(tile);
+                }
+
+                if (distance < GameManager.Instance.BattlePlayer.MaxDistance)
+                {
+                    if (tile.UpNeighbor != null) checkqueue.Enqueue(tile.UpNeighbor);
+                    if (tile.DownNeighbor != null) checkqueue.Enqueue(tile.DownNeighbor);
+                    if (tile.LeftNeighbor != null) checkqueue.Enqueue(tile.LeftNeighbor);
+                    if (tile.RightNeighbor != null) checkqueue.Enqueue(tile.RightNeighbor);
+
+                }
+            }
+            
+            this.PlayerAttackable = attackable;
+            GameManager.Instance.Cursor.PlayerAttackable = attackable;
+        }
+
         public void UpdateBattle()
         {
             switch (GameManager.Instance.BattleState)
@@ -172,11 +219,11 @@ namespace Battle {
                     }
                     GameManager.Instance.Cursor.Moveable = true;
                     GameManager.Instance.Cursor.PlayerMovable = this.PlayerWalkable;
-                    
                     break;
                 case BattleState.PlayerMoving:
                     break;
                 case BattleState.PlayerToAttack:
+                    GameManager.Instance.Cursor.PlayerAttackable = this.PlayerAttackable;
                     break;
                 case BattleState.PlayerAttacking:
                     break;

@@ -12,6 +12,7 @@ namespace Battle {
 	{
 		public bool Moveable = false;
 		public List<FieldTile> PlayerMovable;
+		public List<FieldTile> PlayerAttackable;
 
 		public Sprite Idle;
 		public Sprite Selected;
@@ -91,6 +92,7 @@ namespace Battle {
 			if (targetPos == null)
 				return false;
 			
+			/*
 			switch (GameManager.Instance.BattleState)
 			{
 				case BattleState.PlayerToMove:
@@ -99,7 +101,7 @@ namespace Battle {
 					if (!this.PlayerMovable.Contains(targetPos))
 						return false;
 					break;
-			}
+			}*/
 
 
 			var targetLocation = targetPos.transform.position.ClearZ() + this.transform.position.OnlyZ();
@@ -131,13 +133,31 @@ namespace Battle {
 					
 					case BattleState.PlayerMoving:
 
-						if (this.PlayerCanMove)
+						if (this.PlayerCanMove && this.PlayerMovable.Contains(this.PosTile))
 						{
 							GameManager.Instance.BattlePlayer.MoveToTile(this.PosTile);
 							this.PlayerCanMove = false;
+							GameManager.Instance.Battlefield.UpdateTilesPlayerAttack();
+							GameManager.Instance.BattleState = BattleState.PlayerToAttack;
+							this.PlayerMovable.Clear();
+						}
+						break;
+					
+					case BattleState.PlayerToAttack:
+
+						if (this.PlayerAttackable.Contains(this.PosTile))
+						{
+							Debug.Log("Attack");
+							GameManager.Instance.BattlePlayer.Attack(this.PosTile);
+							foreach (var tile in GameManager.Instance.Battlefield.Tiles)
+							{
+								tile.ResetPlayerAttack();
+							}
+							Destroy(this.gameObject);
 						}
 						
 						break;
+						
 				}
 			}
 			else if (Input.GetButtonDown("Deselect"))
