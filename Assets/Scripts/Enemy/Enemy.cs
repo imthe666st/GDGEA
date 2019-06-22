@@ -40,6 +40,7 @@ namespace Enemy {
 		public float CritChance => this.critChance;
 
 		public float MoveTime = 0.3f;
+		public float AttackTime = 0.2f;
 		
 		public FieldTile PositionTile;
 		
@@ -60,7 +61,7 @@ namespace Enemy {
 
 			if (damage <= 0)
 			{
-				//DEAD
+				//TODO: DEAD
 			}
 		}
 
@@ -152,9 +153,28 @@ namespace Enemy {
 			return targetTile;
 		}
 
-		public virtual void Attack()
+		public virtual bool Attack()
 		{
+			var playerPos = GameManager.Instance.BattlePlayer.transform.position;
+			var pos = this.transform.position;
+
+			var distance = Mathf.Abs(playerPos.x - pos.x) + Mathf.Abs(playerPos.y - pos.y);
+
+			if (distance <= this.MinDistance || distance > this.MaxDistance)
+			{
+				return false;
+			}
+
+			var dir = playerPos - this.transform.position;
+			dir.Normalize();
+
+			var mv = DOTween.Sequence();
+
+			mv.Append(this.transform.DOMove(pos + 0.5f * dir, this.AttackTime))
+			  .Append(this.transform.DOMove(pos, this.AttackTime))
+			  .OnComplete(() => { GameManager.Instance.Battlefield.EnemyCanAttack = true; });
 			
+			return true;
 		}
 	}
 }

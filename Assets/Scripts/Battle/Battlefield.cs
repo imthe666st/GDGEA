@@ -39,6 +39,10 @@ namespace Battle {
         public Queue<Enemy> EnemiesToMove = new Queue<Enemy>();
         public bool EnemyCanMove = false;
         public int EnemyMovedCounter = 0;
+
+        public Queue<Enemy> EnemiesToAttack = new Queue<Enemy>();
+        public bool EnemyCanAttack = false;
+        public int EnemyAttackedCounter = 0;
         
         private void Awake()
         {
@@ -99,7 +103,7 @@ namespace Battle {
         {
             GameManager.Instance.LevelData.EnemyPool.GetRandom().Spawn(this);
             
-            this.UpdateTilesEnemyAttack();
+            //this.UpdateTilesEnemyAttack();
         }
 
         private void SpawnPlayer()
@@ -144,7 +148,7 @@ namespace Battle {
             this.PlayerWalkable = walkableTiles;
         }
 
-        public void UpdateTilesEnemyAttack()
+        /*public void UpdateTilesEnemyAttack()
         {
             foreach (var enemy in this.Enemies)
             {
@@ -159,7 +163,7 @@ namespace Battle {
                                                                                                .difficulty == Difficulty.Easy,
                                                                                                attackAbleTiles, new List<FieldTile>());
             }
-        }
+        }*/
 
         public void UpdateTilesPlayerAttack()
         {
@@ -240,7 +244,7 @@ namespace Battle {
                     this.MoveEnemies();
                     break;
                 case BattleState.EnemiesAttacking:
-                    GameManager.Instance.BattleState = BattleState.PlayerToMove;
+                    this.AttackOfEnemies();
                     break;
                 case BattleState.EndAnimation:
                     break;
@@ -260,6 +264,8 @@ namespace Battle {
                 this.EnemiesToMove.Clear();
                 this.EnemyCanMove = false;
                 GameManager.Instance.BattleState = BattleState.EnemiesAttacking;
+                this.EnemyCanAttack = true;
+                return;
             }
             
             if (this.EnemiesToMove.Count == 0)
@@ -269,6 +275,29 @@ namespace Battle {
             var moving = this.EnemiesToMove.Dequeue();
             this.EnemyCanMove = !moving.Move();
             this.EnemyMovedCounter++;
+        }
+
+        public void AttackOfEnemies()
+        {
+            if (!this.EnemyCanAttack)
+                return;
+
+            if (this.EnemyAttackedCounter >= this.Enemies.Count)
+            {
+                this.EnemyAttackedCounter = 0;
+                this.EnemiesToAttack.Clear();
+                this.EnemyCanAttack = false;
+                GameManager.Instance.BattleState = BattleState.PlayerToMove;
+                return;
+            }
+
+            if (this.EnemiesToMove.Count == 0)
+                foreach (var enemy in this.Enemies)
+                    this.EnemiesToAttack.Enqueue(enemy);
+
+            var attacking = this.EnemiesToAttack.Dequeue();
+            this.EnemyCanAttack = !attacking.Attack();
+            this.EnemyAttackedCounter++;
         }
     }
 }
