@@ -106,6 +106,8 @@ namespace Player {
                 }
             }
 
+            mv.OnComplete(() => { GameManager.Instance.Battlefield.EnemyCanMove = true; });
+            
             this.PositionTile = target;
         }
 
@@ -136,6 +138,10 @@ namespace Player {
                                                                             {
                                                                                 GameManager.Instance.BattleState =
                                                                                     BattleState.EnemiesMoving;
+                                                                                GameManager.Instance.Battlefield
+                                                                                           .Enemies.Shuffle();
+                                                                                GameManager.Instance.Battlefield
+                                                                                .PlayerAttackable.Clear();
                                                                             });
         }
     }

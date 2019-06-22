@@ -13,7 +13,7 @@ namespace Battle {
 
     using Player;
 
-    using Random = UnityEngine.Random;
+    using Random = Random;
 
     public class Battlefield : MonoBehaviour
     {
@@ -36,6 +36,9 @@ namespace Battle {
 
         public List<FieldTile> PlayerWalkable;
         public List<FieldTile> PlayerAttackable;
+        public Queue<Enemy> EnemiesToMove = new Queue<Enemy>();
+        public bool EnemyCanMove = false;
+        public int EnemyMovedCounter = 0;
         
         private void Awake()
         {
@@ -107,7 +110,7 @@ namespace Battle {
             var player = Instantiate(this.BattlePlayerPrefab, pos, Quaternion.identity, this.transform);
             player.PositionTile = this.Tiles[value];
             
-            this.UpdateTilesPlayerWalk();
+            //this.UpdateTilesPlayerWalk();
         }
         
         public bool CanSpawnEnemy() => this.EnemySpawnTiles.Count > 0;
@@ -204,6 +207,11 @@ namespace Battle {
             GameManager.Instance.Cursor.PlayerAttackable = attackable;
         }
 
+        private void Update()
+        {
+            this.UpdateBattle();
+        }
+
         public void UpdateBattle()
         {
             switch (GameManager.Instance.BattleState)
@@ -216,26 +224,51 @@ namespace Battle {
                                                                                                 .position -
                                                                                      new Vector3(0, 0, 0.1f),
                                                                   Quaternion.identity, this.transform);
+                        this.UpdateTilesPlayerWalk();
+                        
+                        GameManager.Instance.Cursor.Moveable      = true;
+                        GameManager.Instance.Cursor.PlayerMovable = this.PlayerWalkable;
                     }
-                    GameManager.Instance.Cursor.Moveable = true;
-                    GameManager.Instance.Cursor.PlayerMovable = this.PlayerWalkable;
                     break;
                 case BattleState.PlayerMoving:
                     break;
                 case BattleState.PlayerToAttack:
-                    GameManager.Instance.Cursor.PlayerAttackable = this.PlayerAttackable;
                     break;
                 case BattleState.PlayerAttacking:
                     break;
                 case BattleState.EnemiesMoving:
+                    this.MoveEnemies();
                     break;
                 case BattleState.EnemiesAttacking:
+                    GameManager.Instance.BattleState = BattleState.PlayerToMove;
                     break;
                 case BattleState.EndAnimation:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+        
+        public void MoveEnemies()
+        {
+            if (!this.EnemyCanMove)
+                return;
+
+            if (this.EnemyMovedCounter >= this.Enemies.Count)
+            {
+                this.EnemyMovedCounter = 0;
+                this.EnemiesToMove.Clear();
+                this.EnemyCanMove = false;
+                GameManager.Instance.BattleState = BattleState.EnemiesAttacking;
+            }
+            
+            if (this.EnemiesToMove.Count == 0)
+                foreach (var enemy in this.Enemies)
+                    this.EnemiesToMove.Enqueue(enemy);
+
+            var moving = this.EnemiesToMove.Dequeue();
+            this.EnemyCanMove = !moving.Move();
+            this.EnemyMovedCounter++;
         }
     }
 }

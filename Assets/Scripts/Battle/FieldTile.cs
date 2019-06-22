@@ -19,6 +19,9 @@ namespace Battle {
 		public Sprite WalkableEnemyAttackable;
 		public Sprite PlayerAttackableEnemyAttackable;
 
+		[HideInInspector]
+		public bool HasEnemy = false;
+
 		public TileStatus  TileStatus
 		{
 			get => this._tileStatus;
@@ -188,6 +191,11 @@ namespace Battle {
 			if (this.DownNeighbor != null) this.DownNeighbor.EnemyAttack(min, max, draw, attackable, checkedTiles);
 			if (this.LeftNeighbor != null) this.LeftNeighbor.EnemyAttack(min, max, draw, attackable, checkedTiles);
 			if (this.RightNeighbor != null) this.RightNeighbor.EnemyAttack(min, max, draw, attackable, checkedTiles);
+		}
+
+		public Enemy.Enemy ContainsEnemy()
+		{
+			return GameManager.Instance.Battlefield.Enemies.Find(e => e.PositionTile == this);
 		}
 	}
 }
