@@ -7,6 +7,8 @@ namespace Player {
 
     using Enemy;
 
+    using Marker;
+
     using Random = Random;
 
     public class BattlePlayer : MonoBehaviour
@@ -17,6 +19,8 @@ namespace Player {
         public float AttackTime = 0.1f;
 
         private int health;
+
+        public HealthBarMarker HealthBarMarker;
 
         private void Awake()
         {
@@ -133,6 +137,7 @@ namespace Player {
                                  GameManager.Instance.Battlefield.transform);
             di.SetValue(damage.ToString());
             
+            this.HealthBarMarker.Change((float) this.health / GameManager.Instance.stats.BaseHealth);
             
             if (this.health <= 0)
             {
