@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   encounterChance: 0.1
+  EnemyPool: {fileID: 11400000, guid: ad7c5dcf828626844b269f619a7ec7c0, type: 2}
