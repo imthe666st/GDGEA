@@ -1,4 +1,6 @@
-﻿using Battle;
+﻿using System;
+
+using Battle;
 
 using Camera;
 
@@ -6,10 +8,14 @@ using DefaultNamespace;
 
 using Equipment;
 
+using Marker;
+
 using Player;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +24,11 @@ public class GameManager : MonoBehaviour
 	public bool isPaused = false;
 	public Inventory playerInventory;
 	public Difficulty difficulty = Difficulty.Normal;
+	public Material MonoChrome;
+	public Stats stats;
 
+	public bool CanEncounter = true;
+	
 	[HideInInspector]
 	public OverworldPlayer OverWorldPlayer;
 	[HideInInspector] 
@@ -34,10 +44,18 @@ public class GameManager : MonoBehaviour
 	[HideInInspector]
 	public CursorController Cursor = null;
 
+	[HideInInspector]
+	public HealthMarker HealthMarker = null;
+	[HideInInspector]
+	public WeaponMarker WeaponMarker = null;
+	
 	private void Awake()
 	{
 		if (Instance == null)
+		{
 			Instance = this;
+			this.ChangeShaderValue(ShaderState.None.toFloat());
+		}
 		else if (Instance != this)
 		{
 			Destroy(this.gameObject);
@@ -53,7 +71,10 @@ public class GameManager : MonoBehaviour
 		{
 			this.LevelData = FindObjectOfType<LevelData>();
 		}
-		
+
+		if (!this.CanEncounter)
+			return;
+
 		if (Random.Range(0f, 1f) <= this.LevelData.encounterChance)
 		{
 			Debug.Log("RANDOM ENCOUNTER!!!!");
@@ -76,9 +97,21 @@ public class GameManager : MonoBehaviour
 		this.Battlefield = null;
 
 		this.CameraController.cameraMode = CameraMode.FollowPlayer;
-		
-		//TODO: DROP STUFF
+
+		SceneManager.UnloadSceneAsync("BattleScene");
+
+		if (this.LevelData.LootPool.CanGetLoot())
+		{
+			var loot = this.LevelData.LootPool.GetRandomLoot();
+			
+			this.playerInventory.CollectedModifier.Add(Instantiate(loot));
+		}
 
 		this.isPaused = false;
+	}
+
+	public void ChangeShaderValue(float value)
+	{
+		this.MonoChrome.SetFloat("_Status", value);
 	}
 }

@@ -2,16 +2,23 @@
 
 namespace Enemy {
 	using System.Linq;
+	using System.Runtime.CompilerServices;
 
 	using Battle;
 
 	using DG.Tweening;
 
+	using Marker;
+
 	using Player;
+
+	using UnityEngine.SceneManagement;
 
 	public abstract class Enemy : MonoBehaviour
 	{
 		public abstract EnemyType Type { get; }
+
+		public EnemyHealthBarMarker HealthBarMarker;
 
 		[SerializeField]
 		protected int damage = 1;
@@ -33,6 +40,8 @@ namespace Enemy {
 		protected int health = 2;
 		public int Health => this.health;
 
+		private int variHealth;
+		
 		[SerializeField]
 		protected float critDamage = 0;
 		public float CritDamage => this.critDamage;
@@ -50,6 +59,7 @@ namespace Enemy {
 		
 		protected virtual void Awake()
 		{
+			this.variHealth = this.Health;
 			this.transform.parent.GetComponent<Battlefield>().RegisterEnemy(this);
 			this.PositionTile = GameManager.Instance.Battlefield.Tiles.First(t => (t.transform.position.ClearZ() -
 																				   this.transform.position.ClearZ())
@@ -59,9 +69,18 @@ namespace Enemy {
 
 		public void TakeDamage(int damage)
 		{
-			this.health -= damage;
+			this.variHealth -= damage;
 
-			if (this.Health <= 0)
+			var di = Instantiate(GameManager.Instance.Battlefield.DamageIndicatorPrefab, GameManager.Instance
+																									.Battlefield
+																									.transform
+								 );
+			di.transform.localPosition = this.transform.localPosition;
+			di.SetValue(damage.ToString());
+			
+			this.HealthBarMarker.Change((float)this.variHealth/ this.health);
+
+			if (this.variHealth <= 0)
 			{
 				GameManager.Instance.Battlefield.Enemies.Remove(this);
 				this.gameObject.SetActive(false);
@@ -71,7 +90,7 @@ namespace Enemy {
 
 		public virtual bool Move()
 		{
-			if (this.health <= 0)
+			if (this.variHealth <= 0)
 				return false;
 
 			var playerPos = GameManager.Instance.BattlePlayer.transform.position;

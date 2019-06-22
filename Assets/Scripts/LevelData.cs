@@ -6,6 +6,7 @@ public class LevelData : MonoBehaviour
 {
 	public float encounterChance = 0.1f;
 	public EnemyPool EnemyPool;
+	public LootPool LootPool;
 	
 	private void Awake()
 	{

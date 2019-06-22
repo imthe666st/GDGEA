@@ -11,8 +11,6 @@ public class DamageIndicator : MonoBehaviour
     public float MoveSpeed = 2f;
     public float FadeSpeed = 1f;
 
-    private float fade = 0;
-
     private TextMeshProUGUI text;
 
     private void Awake()
@@ -20,6 +18,11 @@ public class DamageIndicator : MonoBehaviour
         this.text = this.GetComponentInChildren<TextMeshProUGUI>();
     }
 
+    public void SetValue(string value)
+    {
+        this.text.text = "-" + value;
+    }
+    
     void Update()
     {
         this.transform.position += Time.deltaTime * this.MoveSpeed * Vector3.up;

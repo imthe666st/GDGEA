@@ -231,6 +231,8 @@ MonoBehaviour:
     type: 3}
   CursorPrefab: {fileID: 6388982601925338717, guid: 7b6323e1e3f40744ba7325d761be1721,
     type: 3}
+  DamageIndicatorPrefab: {fileID: 3572529616606475159, guid: f9baf3923a15d3c42b1548c7202f16dc,
+    type: 3}
   fieldWidth: 8
   fieldHeight: 8
   enemySpawnWidth: 2
@@ -238,6 +240,11 @@ MonoBehaviour:
   Tiles: []
   Enemies: []
   PlayerWalkable: []
+  PlayerAttackable: []
+  EnemyCanMove: 0
+  EnemyMovedCounter: 0
+  EnemyCanAttack: 0
+  EnemyAttackedCounter: 0
 --- !u!4 &1025255452
 Transform:
   m_ObjectHideFlags: 0

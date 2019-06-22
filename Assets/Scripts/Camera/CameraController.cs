@@ -19,6 +19,8 @@
 		[SerializeField]
 		protected CameraMode CameraMode = CameraMode.FollowPlayer;
 
+		public TextBox TextBoxPrefab;
+
 		protected OverworldPlayer OverworldPlayer;
 
 		private void Awake()
@@ -65,6 +67,13 @@
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
+		}
+
+		public TextBox SpawnTextBox(string text)
+		{
+			var tb = Instantiate(this.TextBoxPrefab, this.transform);
+			tb.SetString(text);
+			return tb;
 		}
 	}
 }

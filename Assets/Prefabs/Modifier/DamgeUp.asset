@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDistance: 0
   maxDistance: 0
-  damage: 0
+  damage: 2
   movement: 0
   health: 0
   critDamage: 0
