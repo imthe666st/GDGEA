@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraMode: 0
+  TextBoxPrefab: {fileID: 2954733379625776060, guid: a708e10bc85fa18409bc8443b66a72f8,
+    type: 3}
 --- !u!114 &5119410350281806174
 MonoBehaviour:
   m_ObjectHideFlags: 0

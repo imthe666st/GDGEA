@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 	public Difficulty difficulty = Difficulty.Normal;
 	public Material MonoChrome;
 	public Stats stats;
+
+	public bool CanEncounter = true;
 	
 	[HideInInspector]
 	public OverworldPlayer OverWorldPlayer;
@@ -69,7 +71,10 @@ public class GameManager : MonoBehaviour
 		{
 			this.LevelData = FindObjectOfType<LevelData>();
 		}
-		
+
+		if (!this.CanEncounter)
+			return;
+
 		if (Random.Range(0f, 1f) <= this.LevelData.encounterChance)
 		{
 			Debug.Log("RANDOM ENCOUNTER!!!!");
