@@ -15,7 +15,7 @@ MonoBehaviour:
   minDistance: 0
   maxDistance: 0
   damage: 0
-  movement: 0
+  movement: 1
   health: 0
   critDamage: 0
   critChance: 0

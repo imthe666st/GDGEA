@@ -6,6 +6,10 @@ namespace Equipment
 	public class Weapon : ScriptableObject
 	{
 		[SerializeField]
+		protected Sprite representation;
+		public Sprite Representation => this.representation;
+		
+		[SerializeField]
 		protected int damage;
 		public int Damage => this.damage;
 
