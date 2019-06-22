@@ -56,7 +56,7 @@ namespace Player {
 
 		private bool TryMove(Direction direction)
 		{
-			var targetPos = this.transform.position;
+		    var targetPos = new Vector3();//this.transform.position;
 
 			switch (direction)
 			{
@@ -85,11 +85,11 @@ namespace Player {
 			if (hits > 0)
 				return false;
 
-			this.transform.DOMove(targetPos, this.MoveTime).OnComplete(() =>
-																	   {
-																		   this.CanMove = true;
-																		   GameManager.Instance.OverworldPlayerMoved();
-																	   });
+			this.transform.DOMove(this.transform.position + targetPos, this.MoveTime).OnComplete(() =>
+		    {
+		        this.CanMove = true;
+			    GameManager.Instance.OverworldPlayerMoved();
+		    });
 
 			return true;
 		}
