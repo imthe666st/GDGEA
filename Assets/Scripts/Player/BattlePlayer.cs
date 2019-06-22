@@ -94,7 +94,7 @@ namespace Player {
             {
                 var toMove = target.transform.position.ClearZ() - tempPlayerpos.transform.position.ClearZ();
 
-                if (toMove.x > toMove.y)
+                if (Mathf.Abs(toMove.x) > Mathf.Abs(toMove.y))
                 {
                     if (Mathf.Abs(toMove.x) > float.Epsilon)
                         tempPlayerpos = this.CreateXMove(mv, toMove.x, tempPlayerpos);
