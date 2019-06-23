@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rogue White
       objectReference: {fileID: 0}
+    - target: {fileID: 5093999969533513427, guid: 99a5c9687be91574a85167727fca3761,
+        type: 3}
+      propertyPath: maxDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8024746040850568326, guid: 99a5c9687be91574a85167727fca3761,
         type: 3}
       propertyPath: health
