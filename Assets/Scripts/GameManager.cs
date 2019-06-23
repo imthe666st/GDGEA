@@ -83,6 +83,8 @@ public class GameManager : MonoBehaviour
 	private bool gateOpen;
 	private string savedScene;
 	private bool firstSave = true;
+	private bool BeginingStage1;
+	private bool BeginigStage2;
 
 	#endregion
 
@@ -92,7 +94,11 @@ public class GameManager : MonoBehaviour
 
 	[HideInInspector] 
 	public bool GateOpen = false;
-	
+	[HideInInspector]
+	public bool TextRead1 = false;
+	[HideInInspector]
+	public bool TextRead2 = false;
+
 	public AudioSource BackgroundSource;
 	public AudioSource BattleSource;
 	public float FadeTime = 1;
@@ -205,6 +211,8 @@ public class GameManager : MonoBehaviour
 		this.gateOpen = this.GateOpen;
 		this.savedScene = SceneManager.GetActiveScene().name;
 		this.firstSave = false;
+		this.BeginingStage1 = this.TextRead1;
+		this.BeginigStage2 = this.TextRead2;
 	}
 
 	private void Reload(Scene s, LoadSceneMode m)
@@ -212,6 +220,9 @@ public class GameManager : MonoBehaviour
 		this.playerInventory.CollectedModifier = this.savedModifier;
 		this.OverWorldPlayer.transform.position = this.savedPosition;
 		this.GateOpen = this.gateOpen;
+		this.TextRead1 = this.BeginingStage1;
+		this.TextRead2 = this.BeginigStage2;
+		
 		SceneManager.sceneLoaded -= this.Reload;
 	}
 	
@@ -241,12 +252,12 @@ public class GameManager : MonoBehaviour
 	private void FadeIntoBattle()
 	{
 		this.BackgroundSource.DOFade(0.3f, this.FadeTime);
-		this.BattleSource.DOFade(1, this.FadeTime);
+		this.BattleSource.DOFade(0.9f, this.FadeTime);
 	}
 
 	public void FadeOutOfBattle()
 	{
-		this.BackgroundSource.DOFade(1, this.FadeTime);
+		this.BackgroundSource.DOFade(0.9f, this.FadeTime);
 		this.BattleSource.DOFade(0, this.FadeTime);
 	}
 
