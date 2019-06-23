@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 8896468196007110663, guid: aee22bcf854f9d548bdb552065dfdf21,
         type: 3}
       propertyPath: m_Name
-      value: Flower (1)
+      value: cactus_tall1_flower
       objectReference: {fileID: 0}
     - target: {fileID: 1250468769208996580, guid: aee22bcf854f9d548bdb552065dfdf21,
         type: 3}
@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2918516881243579108, guid: aee22bcf854f9d548bdb552065dfdf21,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 24e6006362926234aad4e7a3436bc4c4, type: 2}
     - target: {fileID: 2918516881243579108, guid: aee22bcf854f9d548bdb552065dfdf21,
         type: 3}
       propertyPath: m_Sprite

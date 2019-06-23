@@ -21,9 +21,11 @@ namespace Player {
         private int health;
 
         public HealthBarMarker HealthBarMarker;
+        private AudioSource _audioSource;
 
         private void Awake()
         {
+            this._audioSource = this.GetComponent<AudioSource>();
             GameManager.Instance.BattlePlayer = this;
             this.health = GameManager.Instance.stats.BaseHealth;
         }
@@ -126,6 +128,7 @@ namespace Player {
             }
             
             target.TakeDamage(damage);
+            this._audioSource.Play();
         }
 
         public void TakeDamage(int damage)
@@ -138,7 +141,9 @@ namespace Player {
             di.SetValue(damage.ToString());
             
             this.HealthBarMarker.Change((float) this.health / GameManager.Instance.stats.BaseHealth);
-            
+
+            this._audioSource.Play();
+
             if (this.health <= 0)
             {
                 //TODO: DIE
