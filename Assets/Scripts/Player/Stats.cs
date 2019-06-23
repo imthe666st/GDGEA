@@ -33,6 +33,21 @@ namespace Player
 			}
 		}
 
+		public int GlobalHealth
+		{
+			get
+			{
+				var health = BaseHealth;
+
+				foreach (var modifier in GameManager.Instance.playerInventory.CollectedModifier)
+				{
+					health += modifier.Health;
+				}
+
+				return health;
+			}
+		}
+
 		public int Damage
 		{
 			get

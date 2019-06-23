@@ -184,6 +184,11 @@ public class GameManager : MonoBehaviour
 			
 				this.playerInventory.CollectedModifier.Add(Instantiate(loot));
 
+				if (loot.Health != 0)
+				{
+					this.HealthMarker.SetValue(this.stats.GlobalHealth.ToString());
+				}
+
 				this.CameraController.SpawnTextBox("You've found something: " + loot.Description);
 			}
 
