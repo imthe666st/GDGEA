@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
 
 	public AudioSource BackgroundSource;
 	public AudioSource BattleSource;
+	public AudioSource SaveSource;
 	public float FadeTime = 1;
 
 	private void Awake()
@@ -219,6 +220,9 @@ public class GameManager : MonoBehaviour
 		this.firstSave = false;
 		this.BeginingStage1 = this.TextRead1;
 		this.BeginigStage2 = this.TextRead2;
+
+		this.SaveSource.loop = false;
+		this.SaveSource.Play();
 	}
 
 	private void Reload(Scene s, LoadSceneMode m)
