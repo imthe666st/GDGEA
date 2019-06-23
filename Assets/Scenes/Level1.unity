@@ -992,6 +992,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MathHard: {fileID: 21300000, guid: dea16c2f1ccd0274f93dfea25b80f76c, type: 3}
   MathTooEasy: {fileID: 21300000, guid: 3cdbffc217cfe894bbe2c6b79c594ccb, type: 3}
+  HiddenText1: There is no sign.
+  HiddenText2: '*you hear some faint whispering*'
 --- !u!1001 &93210161
 PrefabInstance:
   m_ObjectHideFlags: 0
