@@ -24,6 +24,9 @@ namespace Player
 						return this.BaseEasyHealth;
 					case Difficulty.Normal:
 						return this.BaseMediumHealth;
+					case Difficulty.Hard:
+						return this.BaseHardHealth;
+						break;
 					default:
 						throw new ArgumentOutOfRangeException();
 				}

@@ -9,6 +9,8 @@ namespace Player {
 
     using Marker;
 
+    using UnityEngine.SceneManagement;
+
     using Random = Random;
 
     public class BattlePlayer : MonoBehaviour
@@ -146,7 +148,8 @@ namespace Player {
 
             if (this.health <= 0)
             {
-                //TODO: DIE
+                SceneManager.LoadScene("Death", LoadSceneMode.Single);
+                GameManager.Instance.isPaused = false;
             }
         }
     }

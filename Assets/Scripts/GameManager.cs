@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
 	[HideInInspector]
 	public bool PredefinedEnemyNoLoot = false;
 
+	public bool CountingTime = false;
+
 	private ShaderState _shaderState;
 	public ShaderState ShaderState
 	{
@@ -81,6 +83,10 @@ public class GameManager : MonoBehaviour
 	private bool firstSave = true;
 
 	#endregion
+
+	public float timePlayed = 0;
+	public int FightsEncountered = 0;
+	public int EnemiesKilled = 0;
 
 	[HideInInspector] 
 	public bool GateOpen = false;
@@ -133,6 +139,8 @@ public class GameManager : MonoBehaviour
 	{
 		this.isPaused = true;
 		this.BattleState = BattleState.PlayerToMove;
+
+		this.FightsEncountered++;
 		
 		SceneManager.LoadScene("BattleScene", LoadSceneMode.Additive);
 		this.CameraController.cameraMode = CameraMode.Static;
@@ -201,5 +209,26 @@ public class GameManager : MonoBehaviour
 		}
 		SceneManager.sceneLoaded += this.Reload;
 		SceneManager.LoadScene(this.savedScene, LoadSceneMode.Single);
+	}
+
+	public bool SaveExists()
+	{
+		return !this.firstSave;
+	}
+
+	public void StartGame()
+	{
+		this.timePlayed = 0;
+		this.FightsEncountered = 0;
+		this.EnemiesKilled = 0;
+		this.CountingTime = true;
+	}
+
+	public void Update()
+	{
+		if (this.CountingTime)
+		{
+			this.timePlayed += Time.deltaTime;
+		}
 	}
 }
