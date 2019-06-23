@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
+
     public void Open()
     {
 

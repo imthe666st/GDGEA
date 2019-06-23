@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Battle;
 
@@ -48,13 +49,48 @@ public class GameManager : MonoBehaviour
 	public HealthMarker HealthMarker = null;
 	[HideInInspector]
 	public WeaponMarker WeaponMarker = null;
+
+	[HideInInspector]
+	public bool HasPredifinedEnemy = false;
+	[HideInInspector]
+	public Enemy.Enemy PredefinedEnemy = null;
+	[HideInInspector]
+	public Action OnPredifinedEnemyDone;
+	[HideInInspector]
+	public int PredefinedEnemyCount = 1;
+	[HideInInspector]
+	public bool PredefinedEnemyNoLoot = false;
+
+	private ShaderState _shaderState;
+	public ShaderState ShaderState
+	{
+		get => this._shaderState;
+		set
+		{
+			this._shaderState = value;
+			this.ChangeShaderValue(value.toFloat());
+		}
+	}
+
+	#region savefile
 	
+	private List<Modifier> savedModifier;
+	private Vector3        savedPosition;
+	private bool gateOpen;
+	private string savedScene;
+	private bool firstSave = true;
+
+	#endregion
+
+	[HideInInspector] 
+	public bool GateOpen = false;
+
 	private void Awake()
 	{
 		if (Instance == null)
 		{
 			Instance = this;
-			this.ChangeShaderValue(ShaderState.None.toFloat());
+			this.ShaderState = ShaderState.None;
 		}
 		else if (Instance != this)
 		{
@@ -82,6 +118,17 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public void StartPredefinedBattle(Enemy.Enemy enemy, Action onDone = null, int count = 1, bool noLoot = false)
+	{
+		this.HasPredifinedEnemy = true;
+		this.PredefinedEnemy = enemy;
+		this.OnPredifinedEnemyDone = onDone;
+		this.PredefinedEnemyCount = count;
+		this.PredefinedEnemyNoLoot = noLoot;
+		
+		this.StartBattle();
+	}
+
 	public void StartBattle()
 	{
 		this.isPaused = true;
@@ -100,20 +147,59 @@ public class GameManager : MonoBehaviour
 
 		SceneManager.UnloadSceneAsync("BattleScene");
 
-		if (this.LevelData.LootPool.CanGetLoot())
+		if (!this.HasPredifinedEnemy || !this.PredefinedEnemyNoLoot)
 		{
-			var loot = this.LevelData.LootPool.GetRandomLoot();
+			if (this.LevelData.LootPool.CanGetLoot())
+			{
+				var loot = this.LevelData.LootPool.GetRandomLoot();
 			
-			this.playerInventory.CollectedModifier.Add(Instantiate(loot));
+				this.playerInventory.CollectedModifier.Add(Instantiate(loot));
 
-			this.CameraController.SpawnTextBox("You've found something: " + loot.Description);
+				this.CameraController.SpawnTextBox("You've found something: " + loot.Description);
+			}
+
 		}
-
 		this.isPaused = false;
+
+		if (this.HasPredifinedEnemy)
+		{
+			this.HasPredifinedEnemy = false;
+			this.PredefinedEnemy = null;
+			this.PredefinedEnemyCount = 1;
+			this.PredefinedEnemyNoLoot = false;
+			this.OnPredifinedEnemyDone?.Invoke();
+		}
 	}
 
 	public void ChangeShaderValue(float value)
 	{
 		this.MonoChrome.SetFloat("_Status", value);
+	}
+
+	public void Save()
+	{
+		this.savedModifier = new List<Modifier>(this.playerInventory.CollectedModifier);
+		this.savedPosition = this.OverWorldPlayer.transform.position;
+		this.gateOpen = this.GateOpen;
+		this.savedScene = SceneManager.GetActiveScene().name;
+		this.firstSave = false;
+	}
+
+	private void Reload(Scene s, LoadSceneMode m)
+	{
+		this.playerInventory.CollectedModifier = this.savedModifier;
+		this.OverWorldPlayer.transform.position = this.savedPosition;
+		this.GateOpen = this.gateOpen;
+		SceneManager.sceneLoaded -= this.Reload;
+	}
+	
+	public void Load()
+	{
+		if (this.firstSave)
+		{
+			return;
+		}
+		SceneManager.sceneLoaded += this.Reload;
+		SceneManager.LoadScene(this.savedScene, LoadSceneMode.Single);
 	}
 }

@@ -8,6 +8,8 @@ using UnityEngine;
 namespace Player {
 	using System.Linq;
 
+	using UnityEngine.SceneManagement;
+
 	public class OverworldPlayer : PausableObject
 	{
 		public bool  CanMove  = true;
@@ -35,6 +37,21 @@ namespace Player {
 				var willMove = this.TryMove(direction);
 
 				if (!willMove) this.CanMove = true;
+
+				if (Input.GetButtonDown("Save"))
+				{
+					GameManager.Instance.Save();
+				}
+
+				if (Input.GetButtonDown("Load"))
+				{
+					GameManager.Instance.Load();
+				}
+
+				if (Input.GetButtonDown("Exit"))
+				{
+					SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+				}
 			}
 		}
 

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 
 public class RitualPlate : MonoBehaviour
 {
@@ -6,7 +8,18 @@ public class RitualPlate : MonoBehaviour
     [HideInInspector] public int Steps = 0;
     public Gate[] Gates;
 
+    public Enemy.Enemy Enemy;
+    
     private bool Finished = false;
+
+    private void Awake()
+    {
+        if (GameManager.Instance.GateOpen)
+        {
+            this.Steps = 5;
+            this.PerformRitual();
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,6 +38,8 @@ public class RitualPlate : MonoBehaviour
                 gate.Open();
             }
 
+            GameManager.Instance.GateOpen = true;
+
             this.Finished = true;
             this.gameObject.SetActive(false);
             for (var i = 0; i < this.transform.childCount; i++)
@@ -34,7 +49,7 @@ public class RitualPlate : MonoBehaviour
         }
         else
         {
-            // fight
+            GameManager.Instance.StartPredefinedBattle(this.Enemy, null, this.Steps, false);
             this.Steps = 0;
         }
 

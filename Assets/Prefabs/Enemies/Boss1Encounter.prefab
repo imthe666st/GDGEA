@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2722925695387730409
+--- !u!1 &545827499938484046
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3699175008564046366}
-  - component: {fileID: 5829805508353405700}
-  - component: {fileID: 2281463646984832135}
+  - component: {fileID: 7778623913569735270}
+  - component: {fileID: 1142612526267743862}
+  - component: {fileID: 545827499938484047}
   m_Layer: 0
-  m_Name: EncounterFreeZone
+  m_Name: Boss1Encounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3699175008564046366
+--- !u!4 &7778623913569735270
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2722925695387730409}
+  m_GameObject: {fileID: 545827499938484046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,13 +32,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &5829805508353405700
-PolygonCollider2D:
+--- !u!114 &1142612526267743862
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2722925695387730409}
+  m_GameObject: {fileID: 545827499938484046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550d0faf2b6ccc049891f847a89e2f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy: {fileID: 4946262996058684881, guid: 6002671f3e9b8924c876e53767a4541c, type: 3}
+  Count: 1
+  NoLoot: 1
+  WinText:
+  - Hey!
+  - Some Color is back
+  - Let's find the other one!
+  WalkDistance: -10
+  WalkTime: 1
+  SceneTo: Level2
+  ToDestroy: {fileID: 0}
+  FadeOutPrefab: {fileID: 5498461379937895368, guid: f7613c4cfd24d0d4a8a424d10dd5a55f,
+    type: 3}
+--- !u!61 &545827499938484047
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545827499938484046}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -55,21 +80,6 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.49042812, y: 0.48995477}
-      - {x: -0.49986255, y: 0.4953798}
-      - {x: -0.47008234, y: -0.5539943}
-      - {x: 0.48969984, y: -0.52456856}
---- !u!114 &2281463646984832135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2722925695387730409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5bf91c4989a3f949bc6d553240bf202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.8}
+  m_EdgeRadius: 0
