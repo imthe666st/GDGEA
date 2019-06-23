@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7328809534681450640}
   - component: {fileID: 6828856992273037130}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Boss 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,4 +59,4 @@ MonoBehaviour:
   - {fileID: 4946262996058684881, guid: 6002671f3e9b8924c876e53767a4541c, type: 3}
   - {fileID: 455191907815217598, guid: 97b6a7473d2e61d47b6c643a2ad2b63e, type: 3}
   - {fileID: 455191907815217598, guid: 97b6a7473d2e61d47b6c643a2ad2b63e, type: 3}
-  - {fileID: 1769245306338779016, guid: d5799b64260cc064e8a0d009b505e05e, type: 3}
+  - {fileID: 455191907815217598, guid: 97b6a7473d2e61d47b6c643a2ad2b63e, type: 3}

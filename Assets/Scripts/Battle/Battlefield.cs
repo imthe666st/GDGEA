@@ -13,6 +13,8 @@ namespace Battle {
 
     using Player;
 
+    using UnityEngine.WSA;
+
     using Random = Random;
 
     public class Battlefield : MonoBehaviour
@@ -217,44 +219,69 @@ namespace Battle {
             }
 
             var attackable = new List<FieldTile>();
-            
-            var checkqueue = new Queue<FieldTile>();
+
             
             var playerTile = GameManager.Instance.BattlePlayer.PositionTile;
-            checkqueue.Enqueue(playerTile);
-
-            if (playerTile.HasEnemy)
-            {
-                this.Enemies.Find(e => e.PositionTile = playerTile).Kill();
-            }
-
-            var checkedTiles = new List<FieldTile>();
             
-            while (checkqueue.Count > 0)
+            attackable = this.Tiles.Where(t =>
+                                          {
+                                              var dist = Mathf.Abs(t.transform.position.x - playerTile.transform
+                                                                                                      .position.x) +
+                                                         Mathf.Abs(t.transform.position.y - playerTile.transform
+                                                                                                      .position.y);
+
+                                              return dist <= GameManager.Instance.stats.MaxDistance;
+                                              
+                                          }).ToList();
+
+            try { 
+                attackable.Remove(playerTile);}
+            catch (Exception e)
             {
-                var tile = checkqueue.Dequeue();
-
-                if (checkedTiles.Contains(tile))
-                    continue;
-                
-                var distance = Mathf.Abs(playerTile.transform.position.x - tile.transform.position.x) 
-                               + Mathf.Abs(playerTile.transform.position.y - tile.transform.position.y);
-
-                if (distance > GameManager.Instance.stats.MinDistance && distance <= GameManager.Instance.stats.MaxDistance)
-                {
-                    tile.TileStatus |= TileStatus.PlayerAttackable;
-                    attackable.Add(tile);
-                }
-
-                if (distance < GameManager.Instance.stats.MaxDistance)
-                {
-                    if (tile.UpNeighbor != null) checkqueue.Enqueue(tile.UpNeighbor);
-                    if (tile.DownNeighbor != null) checkqueue.Enqueue(tile.DownNeighbor);
-                    if (tile.LeftNeighbor != null) checkqueue.Enqueue(tile.LeftNeighbor);
-                    if (tile.RightNeighbor != null) checkqueue.Enqueue(tile.RightNeighbor);
-
-                }
+                // ignored
             }
+
+            foreach (var fieldTile in attackable)
+            {
+                fieldTile.TileStatus |= TileStatus.PlayerAttackable;
+            }
+
+            //var checkqueue = new Queue<FieldTile>();
+                
+                /*checkqueue.Enqueue(playerTile);
+    
+                if (playerTile.HasEnemy)
+                {
+                    this.Enemies.Find(e => e.PositionTile = playerTile).Kill();
+                }
+    
+                var checkedTiles = new List<FieldTile>();
+                
+                while (checkqueue.Count > 0)
+                {
+                    var tile = checkqueue.Dequeue();
+    
+                    if (checkedTiles.Contains(tile))
+                        continue;
+                    
+                    var distance = Mathf.Abs(playerTile.transform.position.x - tile.transform.position.x) 
+                                   + Mathf.Abs(playerTile.transform.position.y - tile.transform.position.y);
+    
+                    if (distance > GameManager.Instance.stats.MinDistance && distance <= GameManager.Instance.stats.MaxDistance)
+                    {
+                        tile.TileStatus |= TileStatus.PlayerAttackable;
+                        attackable.Add(tile);
+                    }
+    
+                    if (distance < GameManager.Instance.stats.MaxDistance)
+                    {
+                        if (tile.UpNeighbor != null) checkqueue.Enqueue(tile.UpNeighbor);
+                        if (tile.DownNeighbor != null) checkqueue.Enqueue(tile.DownNeighbor);
+                        if (tile.LeftNeighbor != null) checkqueue.Enqueue(tile.LeftNeighbor);
+                        if (tile.RightNeighbor != null) checkqueue.Enqueue(tile.RightNeighbor);
+    
+                    }
+                }*/
             
             this.PlayerAttackable = attackable;
             GameManager.Instance.Cursor.PlayerAttackable = attackable;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4545640784590781636}
   - component: {fileID: 2208632449930596080}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Rogue 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,5 +57,5 @@ MonoBehaviour:
   PositionTile: {fileID: 0}
   Enemies:
   - {fileID: 3016184026871548486, guid: 10377114394e0e0439499cbcd1d00a5a, type: 3}
-  - {fileID: 8410163858631099249, guid: 997df649f8fd34442a1048dfb1dd8324, type: 3}
-  - {fileID: 5093999969533513427, guid: 99a5c9687be91574a85167727fca3761, type: 3}
+  - {fileID: 2309006210439148022, guid: 5c6d5d85b8cfaf34fbd198f48c0f99be, type: 3}
+  - {fileID: 1769245306338779016, guid: d5799b64260cc064e8a0d009b505e05e, type: 3}

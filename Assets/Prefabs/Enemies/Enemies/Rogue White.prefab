@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8024746040850568273, guid: 99a5c9687be91574a85167727fca3761,
+        type: 3}
+      propertyPath: m_Name
+      value: Rogue White
+      objectReference: {fileID: 0}
+    - target: {fileID: 8024746040850568326, guid: 99a5c9687be91574a85167727fca3761,
+        type: 3}
+      propertyPath: health
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3278244588031467629, guid: 99a5c9687be91574a85167727fca3761,
         type: 3}
       propertyPath: m_Name
