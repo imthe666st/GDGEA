@@ -10,8 +10,14 @@ PrefabInstance:
     - target: {fileID: 4232351932943349309, guid: 6d13f688c8e117e479c102dfe00adda3,
         type: 3}
       propertyPath: m_Name
-      value: Rock Enemy
+      value: Large Rock Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4232351932943349307, guid: 6d13f688c8e117e479c102dfe00adda3,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 968056c34eb54274db0f390025867995,
+        type: 3}
     - target: {fileID: 4232351932943349306, guid: 6d13f688c8e117e479c102dfe00adda3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,16 +73,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4232351932943349307, guid: 6d13f688c8e117e479c102dfe00adda3,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 968056c34eb54274db0f390025867995,
-        type: 3}
     - target: {fileID: 5869169182172878979, guid: 6d13f688c8e117e479c102dfe00adda3,
         type: 3}
       propertyPath: health
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869169182172878979, guid: 6d13f688c8e117e479c102dfe00adda3,
+        type: 3}
+      propertyPath: baseCritDamage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869169182172878979, guid: 6d13f688c8e117e479c102dfe00adda3,
+        type: 3}
+      propertyPath: critChance
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5869169182172878979, guid: 6d13f688c8e117e479c102dfe00adda3,
+        type: 3}
+      propertyPath: damage
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d13f688c8e117e479c102dfe00adda3, type: 3}

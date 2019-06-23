@@ -10,7 +10,37 @@ PrefabInstance:
     - target: {fileID: 3416974361170514799, guid: 6002671f3e9b8924c876e53767a4541c,
         type: 3}
       propertyPath: m_Name
-      value: Boss 2
+      value: Boss 2 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946262996058684881, guid: 6002671f3e9b8924c876e53767a4541c,
+        type: 3}
+      propertyPath: damage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946262996058684881, guid: 6002671f3e9b8924c876e53767a4541c,
+        type: 3}
+      propertyPath: maxDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946262996058684881, guid: 6002671f3e9b8924c876e53767a4541c,
+        type: 3}
+      propertyPath: movement
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946262996058684881, guid: 6002671f3e9b8924c876e53767a4541c,
+        type: 3}
+      propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946262996058684881, guid: 6002671f3e9b8924c876e53767a4541c,
+        type: 3}
+      propertyPath: critChance
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946262996058684881, guid: 6002671f3e9b8924c876e53767a4541c,
+        type: 3}
+      propertyPath: baseCritDamage
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3416974361170514792, guid: 6002671f3e9b8924c876e53767a4541c,
         type: 3}

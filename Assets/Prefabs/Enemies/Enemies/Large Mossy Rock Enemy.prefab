@@ -10,7 +10,27 @@ PrefabInstance:
     - target: {fileID: 343815904469162382, guid: 3bc9528ab1639e046bdf2762b9642227,
         type: 3}
       propertyPath: m_Name
-      value: Mossy Rock Enemy
+      value: Large Mossy Rock Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8001301492337260336, guid: 3bc9528ab1639e046bdf2762b9642227,
+        type: 3}
+      propertyPath: health
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8001301492337260336, guid: 3bc9528ab1639e046bdf2762b9642227,
+        type: 3}
+      propertyPath: damage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8001301492337260336, guid: 3bc9528ab1639e046bdf2762b9642227,
+        type: 3}
+      propertyPath: critChance
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8001301492337260336, guid: 3bc9528ab1639e046bdf2762b9642227,
+        type: 3}
+      propertyPath: baseCritDamage
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 343815904469162377, guid: 3bc9528ab1639e046bdf2762b9642227,
         type: 3}
@@ -73,10 +93,5 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 3e919b0f5e0b439488acb1faa2c45461,
         type: 3}
-    - target: {fileID: 8001301492337260336, guid: 3bc9528ab1639e046bdf2762b9642227,
-        type: 3}
-      propertyPath: health
-      value: 25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bc9528ab1639e046bdf2762b9642227, type: 3}

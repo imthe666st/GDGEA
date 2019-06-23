@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 4765663914487231781, guid: bab31ccc5719af046afaab1ff30a17ad,
         type: 3}
       propertyPath: m_Name
-      value: Boss 1
+      value: Boss 1 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4765663914487231778, guid: bab31ccc5719af046afaab1ff30a17ad,
         type: 3}
@@ -65,6 +65,41 @@ PrefabInstance:
     - target: {fileID: 4765663914487231778, guid: bab31ccc5719af046afaab1ff30a17ad,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: damage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: maxDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: movement
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: health
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: critDamage
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: critChance
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: baseCritDamage
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4765663914487231779, guid: bab31ccc5719af046afaab1ff30a17ad,
