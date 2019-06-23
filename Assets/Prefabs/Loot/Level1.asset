@@ -25,4 +25,16 @@ MonoBehaviour:
     Chance: 2
   - Loot: {fileID: 11400000, guid: 1fbed89128b661d4686763bf31d37767, type: 2}
     Chance: 2
+  - Loot: {fileID: 11400000, guid: 61d99e3dfe364b94ea0a89620565a9a1, type: 2}
+    Chance: 1
+  - Loot: {fileID: 11400000, guid: 683699f05104a304cbfa1056fae63a6d, type: 2}
+    Chance: 1
+  - Loot: {fileID: 11400000, guid: d01b8dcdb74536149a91a3c2aff61c73, type: 2}
+    Chance: 1
+  - Loot: {fileID: 11400000, guid: fbc68ec276cd70349a2009b4766584e4, type: 2}
+    Chance: 1
+  - Loot: {fileID: 11400000, guid: 2515b4370609ba24e8d33f71f7e4b9ed, type: 2}
+    Chance: 1
+  - Loot: {fileID: 11400000, guid: 10e7925dc7505134c8792a0cc7ad32fb, type: 2}
+    Chance: 1
   GlobalLootChance: 0.3
