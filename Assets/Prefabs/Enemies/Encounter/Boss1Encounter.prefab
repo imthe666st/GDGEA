@@ -51,6 +51,7 @@ MonoBehaviour:
   - Hey!
   - Some Color is back
   - Let's find the other one!
+  AttackText: '*Muffled Sounds*'
   WalkDistance: -10
   WalkTime: 1
   SceneTo: Level2

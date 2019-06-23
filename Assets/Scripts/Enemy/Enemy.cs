@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Enemy {
+	using System;
 	using System.Linq;
 	using System.Runtime.CompilerServices;
 
@@ -13,6 +14,8 @@ namespace Enemy {
 	using Player;
 
 	using UnityEngine.SceneManagement;
+
+	using Random = UnityEngine.Random;
 
 	public abstract class Enemy : MonoBehaviour
 	{
@@ -88,12 +91,17 @@ namespace Enemy {
 
 			if (this.variHealth <= 0)
 			{
-				GameManager.Instance.Battlefield.Enemies.Remove(this);
-				this.PositionTile.HasEnemy = false;
-				GameManager.Instance.EnemiesKilled++;
-				this.gameObject.SetActive(false);
-				Destroy(this.gameObject);
+				this.Kill();
 			}
+		}
+
+		public void Kill()
+		{
+			GameManager.Instance.Battlefield.Enemies.Remove(this);
+			this.PositionTile.HasEnemy = false;
+			GameManager.Instance.EnemiesKilled++;
+			this.gameObject.SetActive(false);
+			Destroy(this.gameObject);
 		}
 
 		public virtual bool Move()
@@ -108,7 +116,7 @@ namespace Enemy {
 																										.transform
 																										.position.y);
 			
-			if (distance < this.MaxDistance)
+			if (distance <= this.MaxDistance)
 				return false;
 
 			this.CreateMovement(GameManager.Instance.BattlePlayer.PositionTile);
@@ -129,7 +137,6 @@ namespace Enemy {
 																										.transform
 																										.position.y);
 
-			
 			var distanceWalkable = this.movement;
 			
 			while (distanceWalkable > 0 && distance > this.MaxDistance + 1)
@@ -162,6 +169,11 @@ namespace Enemy {
 
 		private FieldTile CreateYMove(Sequence sq, float yDiff, FieldTile tile)
 		{
+			if (Math.Abs(Mathf.Abs(yDiff) - 1) < float.Epsilon)
+			{
+				return tile;
+			}
+			
 			var targetTile = yDiff < 0 ? tile.DownNeighbor : tile.UpNeighbor;
 
 			if (targetTile.HasEnemy)
@@ -174,6 +186,11 @@ namespace Enemy {
 
 		private FieldTile CreateXMove(Sequence sq, float xDiff, FieldTile tile)
 		{
+			if (Math.Abs(Mathf.Abs(xDiff) - 1) < float.Epsilon)
+			{
+				return tile;
+			}
+			
 			var targetTile = xDiff < 0 ? tile.LeftNeighbor : tile.RightNeighbor;
 
 			if (targetTile.HasEnemy)

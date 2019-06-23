@@ -7,6 +7,8 @@ namespace Battle {
 
     using Camera;
 
+    using DG.Tweening;
+
     using Enemy;
 
     using Player;
@@ -220,6 +222,11 @@ namespace Battle {
             
             var playerTile = GameManager.Instance.BattlePlayer.PositionTile;
             checkqueue.Enqueue(playerTile);
+
+            if (playerTile.HasEnemy)
+            {
+                this.Enemies.Find(e => e.PositionTile = playerTile).Kill();
+            }
 
             var checkedTiles = new List<FieldTile>();
             

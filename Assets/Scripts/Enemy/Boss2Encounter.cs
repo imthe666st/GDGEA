@@ -9,8 +9,10 @@ namespace Enemy {
     public class Boss2Encounter : PredefinedEncounter
     {
         public  string[] WinText;
-        private int      access = 0;
+        private int      accessWin = 0;
 
+        public string AttackText;
+        
         public float WalkDistance;
         public float WalkTime;
 
@@ -19,7 +21,15 @@ namespace Enemy {
         public GameObject toDestroy;
 
         public FadeOut FadeOutPrefab;
-		
+
+        protected override void OnTriggerEnter2D(Collider2D other)
+        {
+            GameManager.Instance.CameraController.SpawnTextBox(this.AttackText).OnClosed(() =>
+                                                                                         {
+                                                                                             GameManager.Instance.StartPredefinedBattle(this.Enemy, this.OnDone, this.Count, this.NoLoot);
+                                                                                         });
+        }
+
         protected override void OnDone()
         {
             Destroy(this.toDestroy);
@@ -44,9 +54,10 @@ namespace Enemy {
 
         protected void NextBox()
         {
-            if (this.access < this.WinText.Length)
+            if (this.accessWin < this.WinText.Length)
             {
-                GameManager.Instance.CameraController.SpawnTextBox(this.WinText[this.access++]).OnClosed(this.NextBox);
+                GameManager.Instance.CameraController.SpawnTextBox(this.WinText[this.accessWin++]).OnClosed(this
+                .NextBox);
             }
             else
             {
