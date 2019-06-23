@@ -50,8 +50,8 @@ MonoBehaviour:
   WinText:
   - All the color is back
   - yay
-  WalkDistance: 5
-  WalkTime: 5
+  WalkDistance: 7
+  WalkTime: 4
   SceneTo: WinScene
   toDestroy: {fileID: 0}
   FadeOutPrefab: {fileID: 5498461379937895368, guid: f7613c4cfd24d0d4a8a424d10dd5a55f,

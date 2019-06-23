@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WinScene.unity
     guid: 7cedb8a3e7996db4aa7ddcd75e7a5c6c
+  - enabled: 1
+    path: Assets/Scenes/Death.unity
+    guid: 04ccb25bb949236479bd98d598011e9f
+  - enabled: 1
+    path: Assets/Scenes/DifficultySelect.unity
+    guid: a810754c655917f44b135d3436e063f8
   m_configObjects: {}
