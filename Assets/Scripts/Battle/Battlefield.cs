@@ -13,8 +13,6 @@ namespace Battle {
 
     using Player;
 
-    using UnityEngine.WSA;
-
     using Random = Random;
 
     public class Battlefield : MonoBehaviour
@@ -293,7 +291,9 @@ namespace Battle {
 
             if (this.Enemies.Count == 0)
             {
-                GameManager.Instance.EndBattle();
+                var sq = DOTween.Sequence();
+                sq.AppendInterval(1f)
+                  .OnComplete(() => { GameManager.Instance.EndBattle(); });
             }
         }
 
