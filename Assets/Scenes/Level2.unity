@@ -13221,6 +13221,11 @@ PrefabInstance:
       propertyPath: toDestroy
       value: 
       objectReference: {fileID: 303839933}
+    - target: {fileID: 3559168621611571644, guid: d7ebe7345b23b6a409808cc02dcdc986,
+        type: 3}
+      propertyPath: AttackText
+      value: '*Muffled Sounds*'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7ebe7345b23b6a409808cc02dcdc986, type: 3}
 --- !u!1 &1283380881
