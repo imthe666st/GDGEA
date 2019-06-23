@@ -102,6 +102,8 @@ MonoBehaviour:
   CameraMode: 0
   TextBoxPrefab: {fileID: 2954733379625776060, guid: a708e10bc85fa18409bc8443b66a72f8,
     type: 3}
+  PictureBoxPrefab: {fileID: 3708440170654277768, guid: e81d9882ce140164a8b9fca180a49dc4,
+    type: 3}
 --- !u!114 &5119410350281806174
 MonoBehaviour:
   m_ObjectHideFlags: 0
