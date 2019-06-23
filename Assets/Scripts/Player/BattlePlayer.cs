@@ -36,9 +36,9 @@ namespace Player {
         {
             var tempPlayerpos = this.PositionTile;
 
-            this.transform.DOMove(target.transform.position.ClearZ() + this.transform.position.OnlyZ(), this.MoveTime);
+            //this.transform.DOMove(target.transform.position.ClearZ() + this.transform.position.OnlyZ(), this.MoveTime);
             
-            /*var mv = DOTween.Sequence();
+            var mv = DOTween.Sequence();
 
             while (tempPlayerpos != target)
             {
@@ -54,7 +54,7 @@ namespace Player {
                     if (Mathf.Abs(toMove.y) > float.Epsilon)
                         tempPlayerpos = this.CreateYMove(mv, toMove.y, tempPlayerpos);
                 }
-            }*/
+            }
 
             //mv.OnComplete(() => { GameManager.Instance.Battlefield.EnemyCanMove = true; });
             
