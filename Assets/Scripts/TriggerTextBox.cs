@@ -9,7 +9,7 @@ public class TriggerTextBox : MonoBehaviour
 
     private int access = 0;
 
-	private void Awake()
+	private void Start()
 	{
 		if (SceneManager.GetActiveScene().name.Contains("1"))
 		{

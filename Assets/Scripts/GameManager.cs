@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Battle;
 
@@ -267,5 +268,16 @@ public class GameManager : MonoBehaviour
 		{
 			this.timePlayed += Time.deltaTime;
 		}
+	}
+
+	public void ToggleWeapons()
+	{
+		var current = this.playerInventory.CurrentWeapon;
+
+		var other = this.playerInventory.CollectedWeapons.First(w => w != current);
+
+		this.playerInventory.CurrentWeapon = other;
+		
+		this.WeaponMarker.Set(other.Representation);
 	}
 }

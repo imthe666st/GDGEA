@@ -16,4 +16,4 @@ MonoBehaviour:
   damage: 1
   minDistance: 1
   maxDistance: 3
-  movement: 0
+  movement: 1

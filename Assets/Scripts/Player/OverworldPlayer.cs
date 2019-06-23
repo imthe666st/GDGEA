@@ -52,6 +52,11 @@ namespace Player {
 				{
 					SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
 				}
+
+//				if (Input.GetButtonDown("Toggle"))
+//				{
+//					GameManager.Instance.ToggleWeapons();
+//				}
 			}
 		}
 
