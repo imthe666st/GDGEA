@@ -9,6 +9,7 @@ public class RitualPlate : MonoBehaviour
     public Gate[] Gates;
 
     public Enemy.Enemy Enemy;
+    public PredefinedEncounter Encounter;
     
     private bool Finished = false;
 
