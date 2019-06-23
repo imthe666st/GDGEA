@@ -231,6 +231,8 @@ MonoBehaviour:
 
     Quick save using F5 Quick load using F6
 
+    Exit while ingame using ESC in the Overworld
+
 
     How to fight:
 
@@ -310,12 +312,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -10.6403885, w: 0}
   m_textInfo:
     textComponent: {fileID: 1183635711}
-    characterCount: 204
+    characterCount: 249
     spriteCount: 0
-    spaceCount: 40
-    wordCount: 38
+    spaceCount: 48
+    wordCount: 46
     linkCount: 0
-    lineCount: 10
+    lineCount: 11
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0

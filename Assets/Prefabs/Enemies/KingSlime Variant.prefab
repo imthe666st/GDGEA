@@ -10,7 +10,42 @@ PrefabInstance:
     - target: {fileID: 4765663914487231781, guid: bab31ccc5719af046afaab1ff30a17ad,
         type: 3}
       propertyPath: m_Name
-      value: KingSlime
+      value: KingSlime Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: damage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: minDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: maxDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: movement
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: health
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: critChance
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
+        type: 3}
+      propertyPath: critDamage
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4765663914487231778, guid: bab31ccc5719af046afaab1ff30a17ad,
         type: 3}
@@ -73,30 +108,5 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: bee6330e8f5048b4a929919b68132b86,
         type: 3}
-    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
-        type: 3}
-      propertyPath: damage
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
-        type: 3}
-      propertyPath: minDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
-        type: 3}
-      propertyPath: maxDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
-        type: 3}
-      propertyPath: movement
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad,
-        type: 3}
-      propertyPath: health
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bab31ccc5719af046afaab1ff30a17ad, type: 3}

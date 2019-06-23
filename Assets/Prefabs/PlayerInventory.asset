@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
   CurrentWeapon: {fileID: 11400000, guid: 5bd5bd916bfeaab4e9f1bce5ab70550c, type: 2}
-  CurrentModifier1: {fileID: 0}
-  CurrentModifier2: {fileID: 0}
   CollectedWeapons:
   - {fileID: 11400000, guid: 5bd5bd916bfeaab4e9f1bce5ab70550c, type: 2}
   - {fileID: 11400000, guid: b6504dd5666f78147a96becffadaa339, type: 2}
-  CollectedModifier: []

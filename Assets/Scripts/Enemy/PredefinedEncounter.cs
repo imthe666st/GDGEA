@@ -6,7 +6,7 @@ public class PredefinedEncounter : MonoBehaviour
 	public int Count = 1;
 	public bool NoLoot = false;
 	
-	private void OnTriggerEnter2D(Collider2D other)
+	protected virtual void OnTriggerEnter2D(Collider2D other)
 	{
 		GameManager.Instance.StartPredefinedBattle(this.Enemy, this.OnDone, this.Count, this.NoLoot);
 	}

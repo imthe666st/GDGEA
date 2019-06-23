@@ -33,6 +33,21 @@ namespace Player
 			}
 		}
 
+		public int GlobalHealth
+		{
+			get
+			{
+				var health = BaseHealth;
+
+				foreach (var modifier in GameManager.Instance.playerInventory.CollectedModifier)
+				{
+					health += modifier.Health;
+				}
+
+				return health;
+			}
+		}
+
 		public int Damage
 		{
 			get
@@ -116,7 +131,7 @@ namespace Player
 			{
 				var inventory = GameManager.Instance.playerInventory;
 
-				var critChance = 0f;
+				var critChance = 0.1f;
 
 				foreach (var modifier in inventory.CollectedModifier) critChance += modifier.CritChance;
 

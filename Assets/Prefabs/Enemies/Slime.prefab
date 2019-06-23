@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8392d4de0891ad74a9ff70a749a53923, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dddda0a33e700704ebc423a7a4107994, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,8 +97,8 @@ MonoBehaviour:
   damage: 1
   minDistance: 0
   maxDistance: 1
-  movement: 2
-  health: 2
+  movement: 3
+  health: 1
   critDamage: 0
   critChance: 0
   MoveTime: 0.3

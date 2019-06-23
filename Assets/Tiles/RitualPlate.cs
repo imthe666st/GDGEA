@@ -9,6 +9,7 @@ public class RitualPlate : MonoBehaviour
     public Gate[] Gates;
 
     public Enemy.Enemy Enemy;
+    public PredefinedEncounter Encounter;
     
     private bool Finished = false;
 
@@ -63,7 +64,7 @@ public class RitualPlate : MonoBehaviour
         {
             // fight
             this._audioSource.PlayOneShot(Wrong);
-            GameManager.Instance.StartPredefinedBattle(this.Enemy, null, this.Steps, false);
+            GameManager.Instance.StartPredefinedBattle(this.Enemy, null, this.Steps == 0 ? 1 : this.Steps, false);
             this.Steps = 0;
         }
 

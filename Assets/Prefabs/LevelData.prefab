@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a876c752751174997427acf3cc36ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  encounterChance: 0.4
+  encounterChance: 0.15
   EnemyPool: {fileID: 11400000, guid: ad7c5dcf828626844b269f619a7ec7c0, type: 2}
   LootPool: {fileID: 11400000, guid: c1de14d54bf278640aa0ca672c374965, type: 2}
