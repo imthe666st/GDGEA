@@ -20,7 +20,7 @@ public class Statistics : MonoBehaviour
 		time -= (minute * 60f);
 		var seconds = (int)time;
 
-		var timeText = $"Time played - {minute}:{seconds}";
+		var timeText = $"Time played - {minute}:{seconds :D2}";
 
 		var fightedText = $"Fights encountered - {GameManager.Instance.FightsEncountered}";
 
