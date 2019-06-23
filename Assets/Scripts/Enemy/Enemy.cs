@@ -85,6 +85,8 @@ namespace Enemy {
 			if (this.variHealth <= 0)
 			{
 				GameManager.Instance.Battlefield.Enemies.Remove(this);
+				this.PositionTile.HasEnemy = false;
+				GameManager.Instance.EnemiesKilled++;
 				this.gameObject.SetActive(false);
 				Destroy(this.gameObject);
 			}

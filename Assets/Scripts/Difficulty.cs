@@ -4,5 +4,6 @@ namespace DefaultNamespace
 	{
 		Easy,
 		Normal,
+		Hard,
 	}
 }
