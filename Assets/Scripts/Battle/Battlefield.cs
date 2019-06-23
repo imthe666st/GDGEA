@@ -11,8 +11,6 @@ namespace Battle {
 
     using Player;
 
-    using UnityEngine.WSA;
-
     using Random = Random;
 
     public class Battlefield : MonoBehaviour
@@ -102,7 +100,17 @@ namespace Battle {
 
         private void SpawnEnemies()
         {
-            GameManager.Instance.LevelData.EnemyPool.GetRandom().Spawn(this);
+            if (!GameManager.Instance.HasPredifinedEnemy)
+            {
+                GameManager.Instance.LevelData.EnemyPool.GetRandom().Spawn(this);   
+            }
+            else
+            {
+                for (var i = 0; i < GameManager.Instance.PredefinedEnemyCount; ++i)
+                {
+                    GameManager.Instance.PredefinedEnemy.Spawn(this);
+                }
+            }
             
             //this.UpdateTilesEnemyAttack();
         }

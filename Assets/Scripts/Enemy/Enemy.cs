@@ -18,6 +18,7 @@ namespace Enemy {
 	{
 		public abstract EnemyType Type { get; }
 
+		[HideInInspector]
 		public EnemyHealthBarMarker HealthBarMarker;
 
 		[SerializeField]
@@ -53,6 +54,7 @@ namespace Enemy {
 		public float MoveTime = 0.3f;
 		public float AttackTime = 0.2f;
 		
+		[HideInInspector]
 		public FieldTile PositionTile;
 		
 		public abstract void Spawn(Battlefield battlefield);

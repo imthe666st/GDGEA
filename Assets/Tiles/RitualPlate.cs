@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 
 public class RitualPlate : MonoBehaviour
 {
@@ -6,6 +8,8 @@ public class RitualPlate : MonoBehaviour
     [HideInInspector] public int Steps = 0;
     public Gate[] Gates;
 
+    public Enemy.Enemy Enemy;
+    
     private bool Finished = false;
 
     // audio
@@ -15,8 +19,13 @@ public class RitualPlate : MonoBehaviour
 
     private AudioSource _audioSource;
 
-    void Awake()
+    private void Awake()
     {
+        if (GameManager.Instance.GateOpen)
+        {
+            this.Steps = 5;
+            this.PerformRitual();
+        }
         this._audioSource = this.GetComponent<AudioSource>();
     }
 
@@ -41,6 +50,8 @@ public class RitualPlate : MonoBehaviour
                 gate.Open();
             }
 
+            GameManager.Instance.GateOpen = true;
+
             this.Finished = true;
             
             for (var i = 0; i < this.transform.childCount; i++)
@@ -52,6 +63,7 @@ public class RitualPlate : MonoBehaviour
         {
             // fight
             this._audioSource.PlayOneShot(Wrong);
+            GameManager.Instance.StartPredefinedBattle(this.Enemy, null, this.Steps, false);
             this.Steps = 0;
         }
 

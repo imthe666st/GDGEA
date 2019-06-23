@@ -2,9 +2,9 @@ using System;
 
 public enum ShaderState
 {
-	None,
-	Half,
-	Complete,
+	None = 0,
+	Half = 1,
+	Complete = 2,
 }
 
 public static class ShaderStateExt {
