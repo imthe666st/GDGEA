@@ -2,10 +2,23 @@
 
 public class Sign : InteractableObject
 {
-    public string Text;
+
+    private int Interactions = 0;
+
 
     public override void Interact(Collider2D collider)
     {
-        throw new System.NotImplementedException();
+        this.Interactions += 1;
+        TextBox tb;
+        if (this.Interactions < 3)
+        {
+            tb = GameManager.Instance.CameraController.SpawnTextBox("MEOW MEOW MEOW");
+        }
+        else
+        {
+            tb = GameManager.Instance.CameraController.SpawnTextBox("MEOW 3x");
+        }
+        
+        
     }
 }
