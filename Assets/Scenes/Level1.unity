@@ -32626,7 +32626,7 @@ MonoBehaviour:
   - {fileID: 85368510}
   - {fileID: 1802075100}
   - {fileID: 217324395}
-  Enemy: {fileID: 0}
+  Enemy: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad, type: 3}
   Tick: {fileID: 8300000, guid: 68b6e1f0e281fe44d84866ac23d0f6d1, type: 3}
   Correct: {fileID: 8300000, guid: da8e21ab3a43601498f07099562870cf, type: 3}
   Wrong: {fileID: 8300000, guid: 3bde4cd5221b9e840a8f6b4fb18762bd, type: 3}

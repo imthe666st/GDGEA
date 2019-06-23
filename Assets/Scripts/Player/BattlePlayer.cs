@@ -149,6 +149,7 @@ namespace Player {
             if (this.health <= 0)
             {
                 SceneManager.LoadScene("Death", LoadSceneMode.Single);
+                GameManager.Instance.FadeOutOfBattle();
                 GameManager.Instance.isPaused = false;
             }
         }

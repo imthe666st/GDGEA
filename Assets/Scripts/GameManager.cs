@@ -7,6 +7,8 @@ using Camera;
 
 using DefaultNamespace;
 
+using DG.Tweening;
+
 using Equipment;
 
 using Marker;
@@ -90,6 +92,10 @@ public class GameManager : MonoBehaviour
 
 	[HideInInspector] 
 	public bool GateOpen = false;
+	
+	public AudioSource BackgroundSource;
+	public AudioSource BattleSource;
+	public float FadeTime = 1;
 
 	private void Awake()
 	{
@@ -97,6 +103,10 @@ public class GameManager : MonoBehaviour
 		{
 			Instance = this;
 			this.ShaderState = ShaderState.None;
+			
+			this.BackgroundSource.Play();
+			this.BattleSource.volume = 0;
+			this.BattleSource.Play();
 		}
 		else if (Instance != this)
 		{
@@ -142,6 +152,8 @@ public class GameManager : MonoBehaviour
 
 		this.FightsEncountered++;
 		
+		this.FadeIntoBattle();
+		
 		SceneManager.LoadScene("BattleScene", LoadSceneMode.Additive);
 		this.CameraController.cameraMode = CameraMode.Static;
 	}
@@ -153,6 +165,8 @@ public class GameManager : MonoBehaviour
 
 		this.CameraController.cameraMode = CameraMode.FollowPlayer;
 
+		this.FadeOutOfBattle();
+		
 		SceneManager.UnloadSceneAsync("BattleScene");
 
 		if (!this.HasPredifinedEnemy || !this.PredefinedEnemyNoLoot)
@@ -222,6 +236,18 @@ public class GameManager : MonoBehaviour
 		this.FightsEncountered = 0;
 		this.EnemiesKilled = 0;
 		this.CountingTime = true;
+	}
+
+	private void FadeIntoBattle()
+	{
+		this.BackgroundSource.DOFade(0.3f, this.FadeTime);
+		this.BattleSource.DOFade(1, this.FadeTime);
+	}
+
+	public void FadeOutOfBattle()
+	{
+		this.BackgroundSource.DOFade(1, this.FadeTime);
+		this.BattleSource.DOFade(0, this.FadeTime);
 	}
 
 	public void Update()
