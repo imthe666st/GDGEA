@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8633d15edaf24ba69e843d791b9b58ae, type: 3}
   m_Name: DamgeUp
   m_EditorClassIdentifier: 
+  description: Damage Up!
   minDistance: 0
   maxDistance: 0
   damage: 2

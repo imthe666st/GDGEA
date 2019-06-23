@@ -11,6 +11,8 @@ namespace Battle {
 
     using Player;
 
+    using UnityEngine.WSA;
+
     using Random = Random;
 
     public class Battlefield : MonoBehaviour
@@ -135,6 +137,7 @@ namespace Battle {
 
         public void UpdateTilesPlayerWalk()
         {
+            /*
             foreach (var tile in this.Tiles) tile.Reset();
             
             var player = GameManager.Instance.BattlePlayer;
@@ -146,24 +149,55 @@ namespace Battle {
             walkableTiles, new List<FieldTile>());
 
             this.PlayerWalkable = walkableTiles;
-        }
+            */
 
-        /*public void UpdateTilesEnemyAttack()
-        {
-            foreach (var enemy in this.Enemies)
+            foreach (var tile in this.Tiles)
             {
-                var enemyPos = enemy.transform.position;
-
-                var attackAbleTiles = new List<FieldTile>();
-                this.Tiles[this.fieldHeight * (int) enemyPos.x + (int) enemyPos.y].EnemyAttack(enemy.MinDistance
-                                                                                               + 2,
-                                                                                               enemy.MaxDistance +
-                                                                                               2, 
-                                                                                               GameManager.Instance
-                                                                                               .difficulty == Difficulty.Easy,
-                                                                                               attackAbleTiles, new List<FieldTile>());
+                tile.Reset();
             }
-        }*/
+
+            var player = GameManager.Instance.BattlePlayer;
+
+            var walkableTiles = new List<FieldTile>();
+            var playerTile = player.PositionTile;
+
+            var checkQueue = new Queue<FieldTile>();
+            checkQueue.Enqueue(playerTile);
+
+            var checkedTiles = new List<FieldTile>();
+
+            while (checkQueue.Count > 0)
+            {
+                var tile = checkQueue.Dequeue();
+
+                if (checkedTiles.Contains(tile))
+                    continue;
+
+                checkedTiles.Add(tile);
+
+                if (tile.HasEnemy)
+                    continue;
+
+                var distance = Mathf.Abs(playerTile.transform.position.x - tile.transform.position.x) 
+                               + Mathf.Abs(playerTile.transform.position.y - tile.transform.position.y);
+
+                if (distance <= GameManager.Instance.stats.Movement)
+                {
+                    tile.TileStatus |= TileStatus.Walkable;
+                    walkableTiles.Add(tile);
+                }
+
+                if (distance < GameManager.Instance.stats.Movement)
+                {
+                    if (tile.UpNeighbor != null) checkQueue.Enqueue(tile.UpNeighbor);
+                    if (tile.DownNeighbor != null) checkQueue.Enqueue(tile.DownNeighbor);
+                    if (tile.LeftNeighbor != null) checkQueue.Enqueue(tile.LeftNeighbor);
+                    if (tile.RightNeighbor != null) checkQueue.Enqueue(tile.RightNeighbor);
+                }
+            }
+
+            this.PlayerWalkable = walkableTiles;
+        }
 
         public void UpdateTilesPlayerAttack()
         {

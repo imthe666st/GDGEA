@@ -115,12 +115,21 @@ namespace Battle {
 
 		private void ProcessSelectionInput()
 		{
+			if (GameManager.Instance.BattleState == BattleState.PlayerToMove)
+			{
+				GameManager.Instance.BattleState           = BattleState.PlayerMoving;
+				this.GetComponent<SpriteRenderer>().sprite = this.Selected;
+				this.PlayerOldTile                         = this.PosTile;
+				this.PlayerCanMove                         = true;
+			}
+			
 			if (Input.GetButtonDown("Select"))
 			{
 
 				switch (GameManager.Instance.BattleState)
 				{
 					case BattleState.PlayerToMove:
+						break;
 						//Check if highlighting Player
 						if (Mathf.Abs((this.transform.position - GameManager.Instance.BattlePlayer.transform.position).magnitude) <= 0.1f)
 						{
@@ -160,8 +169,9 @@ namespace Battle {
 						
 				}
 			}
-			else if (Input.GetButtonDown("Deselect"))
+			/*else if (Input.GetButtonDown("Deselect"))
 			{
+				
 				switch (GameManager.Instance.BattleState)
 				{
 					case BattleState.PlayerMoving:
@@ -176,7 +186,7 @@ namespace Battle {
 						this.PlayerOldTile = null;
 						break;
 				}
-			}
+			}*/
 		}
 	}
 }

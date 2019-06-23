@@ -38,8 +38,8 @@ namespace Player
 
 				var damage                                     = 0;
 				if (inventory.CurrentWeapon != null) damage    += inventory.CurrentWeapon.Damage;
-				if (inventory.CurrentModifier1 != null) damage += inventory.CurrentModifier1.Damage;
-				if (inventory.CurrentModifier2 != null) damage += inventory.CurrentModifier2.Damage;
+
+				foreach (var modifier in inventory.CollectedModifier) damage += modifier.Damage;
 
 				return damage;
 			}
@@ -53,10 +53,10 @@ namespace Player
 
 				var movement                                     = this.BaseMovement;
 				if (inventory.CurrentWeapon != null) movement    += inventory.CurrentWeapon.Movement;
-				if (inventory.CurrentModifier1 != null) movement += inventory.CurrentModifier1.Movement;
-				if (inventory.CurrentModifier2 != null) movement += inventory.CurrentModifier2.Movement;
 
-                
+				foreach (var modifier in inventory.CollectedModifier) movement += modifier.Movement;
+
+
 				return movement;
 			}
 		}
@@ -70,8 +70,8 @@ namespace Player
 				var minDistance = 0;
 
 				if (inventory.CurrentWeapon != null) minDistance    += inventory.CurrentWeapon.MinDistance;
-				if (inventory.CurrentModifier1 != null) minDistance += inventory.CurrentModifier1.MinDistance;
-				if (inventory.CurrentModifier2 != null) minDistance += inventory.CurrentModifier2.MinDistance;
+
+				foreach (var modifier in inventory.CollectedModifier) minDistance += modifier.MinDistance;
 
 				return minDistance;
 			}
@@ -86,8 +86,8 @@ namespace Player
 				var maxDistance = 0;
                 
 				if (inventory.CurrentWeapon != null) maxDistance    += inventory.CurrentWeapon.MaxDistance;
-				if (inventory.CurrentModifier1 != null) maxDistance += inventory.CurrentModifier1.MaxDistance;
-				if (inventory.CurrentModifier2 != null) maxDistance += inventory.CurrentModifier2.MaxDistance;
+
+				foreach (var modifier in inventory.CollectedModifier) maxDistance += modifier.MaxDistance;
 
 				return maxDistance;
 			}
@@ -101,8 +101,7 @@ namespace Player
 
 				var critDamage = 2f;
 
-				if (inventory.CurrentModifier1 != null) critDamage += inventory.CurrentModifier1.CritDamage;
-				if (inventory.CurrentModifier2 != null) critDamage += inventory.CurrentModifier2.CritDamage;
+				foreach (var modifier in inventory.CollectedModifier) critDamage += modifier.CritDamage;
 
 				return critDamage;
 			}
@@ -115,9 +114,8 @@ namespace Player
 				var inventory = GameManager.Instance.playerInventory;
 
 				var critChance = 0f;
-                
-				if (inventory.CurrentModifier1 != null) critChance += inventory.CurrentModifier1.CritChance;
-				if (inventory.CurrentModifier2 != null) critChance += inventory.CurrentModifier2.CritChance;
+
+				foreach (var modifier in inventory.CollectedModifier) critChance += modifier.CritChance;
 
 				return critChance;
 			}

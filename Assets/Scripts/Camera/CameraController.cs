@@ -20,6 +20,7 @@
 		protected CameraMode CameraMode = CameraMode.FollowPlayer;
 
 		public TextBox TextBoxPrefab;
+		public PictureBox PictureBoxPrefab;
 
 		protected OverworldPlayer OverworldPlayer;
 
@@ -74,6 +75,13 @@
 			var tb = Instantiate(this.TextBoxPrefab, this.transform);
 			tb.SetString(text);
 			return tb;
+		}
+
+		public PictureBox SpawnPictureBox(Sprite image)
+		{
+			var pb = Instantiate(this.PictureBoxPrefab, this.transform);
+			pb.SetImage(image);
+			return pb;
 		}
 	}
 }

@@ -17,4 +17,4 @@ MonoBehaviour:
     Chance: 2
   - Loot: {fileID: 11400000, guid: bcdcdf610e49cef4fb5a1bb9c1bb421f, type: 2}
     Chance: 2
-  GlobalLootChance: 0.4
+  GlobalLootChance: 1

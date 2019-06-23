@@ -1,5 +1,6 @@
 namespace Equipment
 {
+	using System;
 	using System.Collections.Generic;
 
 	using UnityEngine;
@@ -8,10 +9,10 @@ namespace Equipment
 	public class Inventory : ScriptableObject
 	{
 		public Weapon CurrentWeapon;
-		public Modifier CurrentModifier1;
-		public Modifier CurrentModifier2;
 
-		public List<Weapon> CollectedWeapons;
-		public List<Modifier> CollectedModifier;
+		public List<Weapon> CollectedWeapons = new List<Weapon>();
+		
+		[NonSerialized]
+		public List<Modifier> CollectedModifier = new List<Modifier>();
 	}
 }

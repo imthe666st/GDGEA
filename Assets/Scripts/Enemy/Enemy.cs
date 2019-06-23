@@ -100,7 +100,7 @@ namespace Enemy {
 																										.transform
 																										.position.y);
 			
-			if (distance <= this.MaxDistance)
+			if (distance < this.MaxDistance)
 				return false;
 
 			this.CreateMovement(GameManager.Instance.BattlePlayer.PositionTile);

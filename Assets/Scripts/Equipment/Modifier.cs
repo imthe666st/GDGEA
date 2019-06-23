@@ -9,6 +9,10 @@ namespace Equipment
 	public class Modifier : ScriptableObject
 	{
 		[SerializeField]
+		protected string description = "";
+		public string Description => this.description;
+		
+		[SerializeField]
 		protected int minDistance = 0;
 		public int MinDistance => this.minDistance;
 

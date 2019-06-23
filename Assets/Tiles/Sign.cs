@@ -5,18 +5,21 @@ public class Sign : InteractableObject
 
     private int Interactions = 0;
 
+    public Sprite MathHard;
+    public Sprite MathTooEasy;
+    
 
     public override void Interact(Collider2D collider)
     {
         this.Interactions += 1;
-        TextBox tb;
+        PictureBox pb;
         if (this.Interactions < 3)
         {
-            tb = GameManager.Instance.CameraController.SpawnTextBox("MEOW MEOW MEOW");
+            pb = GameManager.Instance.CameraController.SpawnPictureBox(this.MathHard);
         }
         else
         {
-            tb = GameManager.Instance.CameraController.SpawnTextBox("MEOW 3x");
+            pb = GameManager.Instance.CameraController.SpawnPictureBox(this.MathTooEasy);
         }
         
         
