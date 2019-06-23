@@ -116,7 +116,7 @@ namespace Player
 			{
 				var inventory = GameManager.Instance.playerInventory;
 
-				var critChance = 0f;
+				var critChance = 0.1f;
 
 				foreach (var modifier in inventory.CollectedModifier) critChance += modifier.CritChance;
 
