@@ -3098,7 +3098,7 @@ PrefabInstance:
     - target: {fileID: 1250468769208996580, guid: aee22bcf854f9d548bdb552065dfdf21,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1250468769208996580, guid: aee22bcf854f9d548bdb552065dfdf21,
         type: 3}
@@ -32626,7 +32626,7 @@ MonoBehaviour:
   - {fileID: 85368510}
   - {fileID: 1802075100}
   - {fileID: 217324395}
-  Enemy: {fileID: 0}
+  Enemy: {fileID: 3020831207685069723, guid: bab31ccc5719af046afaab1ff30a17ad, type: 3}
   Tick: {fileID: 8300000, guid: 68b6e1f0e281fe44d84866ac23d0f6d1, type: 3}
   Correct: {fileID: 8300000, guid: da8e21ab3a43601498f07099562870cf, type: 3}
   Wrong: {fileID: 8300000, guid: 3bde4cd5221b9e840a8f6b4fb18762bd, type: 3}
@@ -35814,7 +35814,7 @@ PrefabInstance:
     - target: {fileID: 3699175008564046366, guid: 25dc48ecd9da2ec49a8e1fa873e6ff7b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3699175008564046366, guid: 25dc48ecd9da2ec49a8e1fa873e6ff7b,
         type: 3}
@@ -39064,7 +39064,7 @@ PrefabInstance:
     - target: {fileID: 8762234943039217399, guid: 5a1b40e846b74f3499e99e483eef2833,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8762234943039217399, guid: 5a1b40e846b74f3499e99e483eef2833,
         type: 3}
