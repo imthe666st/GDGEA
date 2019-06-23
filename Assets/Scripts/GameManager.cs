@@ -244,7 +244,7 @@ public class GameManager : MonoBehaviour
 		this.BattleSource.DOFade(1, this.FadeTime);
 	}
 
-	private void FadeOutOfBattle()
+	public void FadeOutOfBattle()
 	{
 		this.BackgroundSource.DOFade(1, this.FadeTime);
 		this.BattleSource.DOFade(0, this.FadeTime);
