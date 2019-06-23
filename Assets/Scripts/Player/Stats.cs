@@ -26,7 +26,8 @@ namespace Player
 						return this.BaseMediumHealth;
 					case Difficulty.Hard:
 						return this.BaseHardHealth;
-						break;
+					case Difficulty.Cheat:
+						return 99;
 					default:
 						throw new ArgumentOutOfRangeException();
 				}
@@ -42,6 +43,11 @@ namespace Player
 				foreach (var modifier in GameManager.Instance.playerInventory.CollectedModifier)
 				{
 					health += modifier.Health;
+				}
+
+				if (health > 99)
+				{
+					return 99;
 				}
 
 				return health;

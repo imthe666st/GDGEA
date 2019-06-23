@@ -5,5 +5,6 @@ namespace DefaultNamespace
 		Easy,
 		Normal,
 		Hard,
+		Cheat,
 	}
 }

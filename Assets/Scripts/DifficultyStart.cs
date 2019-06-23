@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 using DefaultNamespace;
@@ -8,6 +9,15 @@ using UnityEngine.SceneManagement;
 
 public class DifficultyStart : MonoBehaviour
 {
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.F9))
+		{
+			GameManager.Instance.difficulty = Difficulty.Cheat;
+			this.StartGame();
+		}
+	}
+
 	public void StartEasy()
 	{
 		GameManager.Instance.difficulty = Difficulty.Easy;
