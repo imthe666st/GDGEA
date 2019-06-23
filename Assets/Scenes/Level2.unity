@@ -12174,14 +12174,14 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 3.2754745, y: 6.42875}
-      - {x: 9.573301, y: 11.963823}
+      - {x: 9.262545, y: 12.663026}
       - {x: 15.737282, y: 18.996244}
       - {x: 16.440876, y: 31.345293}
       - {x: 23.794147, y: 32.574245}
       - {x: 29.034565, y: 32.11802}
       - {x: 28.123821, y: 9.123112}
       - {x: 19.388676, y: 2.7437248}
-      - {x: 13.562213, y: 2.9237318}
+      - {x: 13.623923, y: 1.7511816}
       - {x: 5.988308, y: 3.0788512}
 --- !u!4 &802554414
 Transform:
@@ -12555,7 +12555,7 @@ PrefabInstance:
     - target: {fileID: 425823612674399504, guid: 1c13da146a181694fa2dcbe3716ff941,
         type: 3}
       propertyPath: encounterChance
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 871640098, guid: 007d622b2a8c3f940b0235d212b4ac61, type: 3}
       propertyPath: m_Enabled
