@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 
 using DG.Tweening;
@@ -37,11 +35,13 @@ public class PictureBox : MonoBehaviour
 		var images = this.GetComponentsInChildren<Image>();
 
 		var sq = DOTween.Sequence();
-		sq.Append(images[0].DOColor(Color.white, this.FadeDuration));
 		
-		foreach (var image in images.Skip(1))
+		foreach (var image in images)
 		{
-			sq.Join(image.DOColor(Color.white, this.FadeDuration));
+			var color = image.color;
+			color.a = 1;
+			
+			sq.Join(image.DOColor(color, this.FadeDuration));
 		}
 
 		sq.OnComplete(() => this.WaitForKey = true);
@@ -53,24 +53,29 @@ public class PictureBox : MonoBehaviour
 		if (!this.WaitForKey)
 			return;
 
-		var images = this.GetComponentsInChildren<Image>();
-		
-		var targetC = new Color(1, 1, 1, 0);
-
-		var sq = DOTween.Sequence();
-		sq.Append(images[0].DOColor(targetC, this.FadeDuration));
-
-		foreach (var image in images.Skip(1))
+		if (Input.GetButtonDown("Select"))
 		{
-			sq.Join(image.DOColor(targetC, this.FadeDuration));
-		}
+			this.WaitForKey = false;
+			
+			var images = this.GetComponentsInChildren<Image>();
 
-		sq.OnComplete(() =>
-					  {
-						  GameManager.Instance.isPaused = false;
-						  this.onClosed?.Invoke();
-						  Destroy(this.gameObject);
-					  });
+			var sq = DOTween.Sequence();
+
+			foreach (var image in images)
+			{
+				var color = image.color;
+				color.a = 0;
+
+				sq.Join(image.DOColor(color, this.FadeDuration));
+			}
+
+			sq.OnComplete(() =>
+						  {
+							  GameManager.Instance.isPaused = false;
+							  this.onClosed?.Invoke();
+							  Destroy(this.gameObject);
+						  });
+		}
 	}
 
 	public void OnClosed(Action onClosed)
