@@ -12824,15 +12824,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 425823612674399504, guid: 1c13da146a181694fa2dcbe3716ff941,
-        type: 3}
-      propertyPath: encounterChance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 871640098, guid: 007d622b2a8c3f940b0235d212b4ac61, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c13da146a181694fa2dcbe3716ff941, type: 3}
 --- !u!1001 &1075879124
@@ -130810,11 +130801,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6826601056298346675, guid: a6d5443c360d3d045b06cdb24dd2b175,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6826601056298346668, guid: a6d5443c360d3d045b06cdb24dd2b175,
         type: 3}
       propertyPath: Input.Array.data[0]
@@ -130824,6 +130810,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Input.Array.data[1]
       value: I can feel it
+      objectReference: {fileID: 0}
+    - target: {fileID: 6826601056298346675, guid: a6d5443c360d3d045b06cdb24dd2b175,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6d5443c360d3d045b06cdb24dd2b175, type: 3}
