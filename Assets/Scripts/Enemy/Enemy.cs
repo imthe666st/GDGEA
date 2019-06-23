@@ -51,6 +51,10 @@ namespace Enemy {
 		protected float critChance = 0;
 		public float CritChance => this.critChance;
 
+		[SerializeField]
+		protected int baseCritDamage = 0;
+		public float BaseCritDamage => this.baseCritDamage;
+
 		public float MoveTime = 0.3f;
 		public float AttackTime = 0.2f;
 		
@@ -216,7 +220,7 @@ namespace Enemy {
 		{
 			var damage = this.Damage;
 
-			if (Random.Range(0, 1f) < this.CritChance) damage = (int) (this.Damage * this.CritDamage);
+			if (Random.Range(0, 1f) < this.CritChance) damage = (int) (this.Damage * this.CritDamage + this.BaseCritDamage);
 
 			player.TakeDamage(damage);
 		}
