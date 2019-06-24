@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3828815534408466031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4804112207809638188}
+  - component: {fileID: 8780456490546958582}
+  m_Layer: 0
+  m_Name: Boss 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4804112207809638188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3828815534408466031}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8780456490546958582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3828815534408466031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d59487bcbb40cebf55ab2a90d203aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBarMarker: {fileID: 0}
+  damage: 1
+  minDistance: 0
+  maxDistance: 1
+  movement: 2
+  health: 2
+  critDamage: 0
+  critChance: 0
+  baseCritDamage: 0
+  MoveTime: 0.3
+  AttackTime: 0.2
+  PositionTile: {fileID: 0}
+  Enemies:
+  - {fileID: 2264957161269101578, guid: 272b9ea682c78eb4f9d8cdd9d4effe05, type: 3}
+  - {fileID: 8410163858631099249, guid: 997df649f8fd34442a1048dfb1dd8324, type: 3}
+  - {fileID: 5093999969533513427, guid: 99a5c9687be91574a85167727fca3761, type: 3}
+  - {fileID: 3016184026871548486, guid: 10377114394e0e0439499cbcd1d00a5a, type: 3}
+  - {fileID: 2309006210439148022, guid: 5c6d5d85b8cfaf34fbd198f48c0f99be, type: 3}
+  - {fileID: 1769245306338779016, guid: d5799b64260cc064e8a0d009b505e05e, type: 3}

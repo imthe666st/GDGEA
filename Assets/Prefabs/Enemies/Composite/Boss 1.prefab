@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1313965434665081299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7328809534681450640}
+  - component: {fileID: 6828856992273037130}
+  m_Layer: 0
+  m_Name: Boss 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7328809534681450640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313965434665081299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6828856992273037130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313965434665081299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d59487bcbb40cebf55ab2a90d203aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBarMarker: {fileID: 0}
+  damage: 1
+  minDistance: 0
+  maxDistance: 1
+  movement: 2
+  health: 2
+  critDamage: 0
+  critChance: 0
+  baseCritDamage: 0
+  MoveTime: 0.3
+  AttackTime: 0.2
+  PositionTile: {fileID: 0}
+  Enemies:
+  - {fileID: 4946262996058684881, guid: 6002671f3e9b8924c876e53767a4541c, type: 3}
+  - {fileID: 455191907815217598, guid: 97b6a7473d2e61d47b6c643a2ad2b63e, type: 3}
+  - {fileID: 455191907815217598, guid: 97b6a7473d2e61d47b6c643a2ad2b63e, type: 3}
+  - {fileID: 455191907815217598, guid: 97b6a7473d2e61d47b6c643a2ad2b63e, type: 3}
